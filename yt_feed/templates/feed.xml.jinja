@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+ <channel>
+  <title>{{ videos_data['channel_data'].title }}</title>
+  <link>
+   https://www.youtube.com/channel/{{ videos_data['channel_data'].id }}</link>
+  <description>{{ videos_data['channel_data'].desc }}</description>
+  <language>en-us</language>
+  <generator>yt_feed</generator>
+  <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+  <pubDate>XXX ADD LINK</pubDate>
+  <lastBuildDate>XXX ADD LINK</lastBuildDate>
+  <managingEditor>XXX ADD LINK</managingEditor>
+  <webMaster>XXX ADD LINK</webMaster>
+  <image>
+   <title>{{ videos_data['channel_data'].title }}</title>
+   <link>https://www.youtube.com/channel/{{ videos_data['channel_data'].id }}</link>
+   <url>{{ videos_data['channel_data'].url }}</url>
+  </image>
+
+  <itunes:author>{{ videos_data['channel_data'].title }}</itunes:author>
+  <itunes:explicit>no</itunes:explicit>
+  <itunes:image href="{{ videos_data['channel_data'].url }}"/>
+  <itunes:owner>
+   <itunes:email>XXX ADD LINK</itunes:email>
+   <itunes:name>{{ videos_data['channel_data'].title }}</itunes:name>
+  </itunes:owner>
+  <itunes:subtitle>{{ videos_data['channel_data'].title }}</itunes:subtitle>
+  <itunes:summary>{{ videos_data['channel_data'].desc }}</itunes:summary>
+  <itunes:block>no</itunes:block>
+  <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml"
+               href="{{ DOMAIN }}/channel/{{ videos_data['video_info'][0]['id'] }}"/>
+
+  {% for video_item in videos_data['video_info'] %}
+   <item>
+    <title>{{ video_item.title }}</title>
+    <link>https://www.youtube.com/watch?v={{ video_item.id }}</link>
+    <description>{{ video_item.desc }}</description>
+    <enclosure
+      url="{{ DOMAIN }}/download/{{ videos_data['podcast_type'] }}/{{ video_item.id }}.{{ videos_data['media_extension'] }}"
+      type="{{ videos_data['podcast_type'] }}/{{ videos_data['media_extension'] }}"/>
+    <guid>https://www.youtube.com/watch?v={{ video_item.id }}</guid>
+    <pubDate>{{ video_item.published_at }}</pubDate>
+    <itunes:duration>{{ video_item.duration }}</itunes:duration>
+    <author>XXX ADD LINK</author>
+
+    <itunes:subtitle>{{ video_item.title }}</itunes:subtitle>
+    <itunes:summary>{{ video_item.desc }}</itunes:summary>
+   </item>
+  {% endfor %}
+ </channel>
+</rss>

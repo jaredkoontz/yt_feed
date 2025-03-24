@@ -1,0 +1,23 @@
+[project]
+name = "yt_feed"
+version = "0.1.0"
+description = "Create a working RSS feed (for your podcatcher) to turn a youtube channel into a podcast"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "dotenv>=0.9.9",
+    "flask>=3.1.0",
+    "google-api-python-client>=2.165.0",
+    "isodate>=0.7.2",
+    "requests>=2.32.3",
+    "yt-dlp>=2025.3.21",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "pre-commit>=4.1.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.11.0",
+]

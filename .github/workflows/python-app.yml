@@ -1,0 +1,31 @@
+# This workflow will install Python dependencies, run tests, and pre-commit with a single version of Python
+
+name: leet_code python
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Install the project
+        run: uv sync --all-extras --dev
+      - name: runs pre-commit
+        uses: tox-dev/action-pre-commit-uv@v1
+#      - name: Test with pytest
+#        run: |
+#          uv run python -m pytest  --cov-report xml:pytest.xml --cov=bw_dedup
+#        uses: MishaKav/pytest-coverage-comment@main
+#        with:
+#          pytest-coverage-path: ./pytest-coverage.txt
+#          junitxml-path: ./pytest.xml
