@@ -38,7 +38,7 @@ jobs:
           git add README.md
           timestamp=$(date -u)
           git commit -m "$GITHUB_SHA Triggered a README.md update ${timestamp}" || exit 0
-          git push
+          git push origin ${{ steps.extract_branch.outputs.branch }}
         if: github.event_name == 'pull_request'
       - name: fail if readme changed and we aren't on PR
         uses: nickcharlton/diff-check@main
