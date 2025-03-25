@@ -1,6 +1,6 @@
 # This workflow will install Python dependencies, run tests, and pre-commit with a single version of Python
 
-name: leet_code python
+name: yt_feed CI actions
 
 on:
   push:
@@ -20,8 +20,24 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Install the project
         run: uv sync --all-extras --dev
+      - name: Run Jinja2 script to update README
+        run: |
+          pwd
+          ls
+          uv run python tools/update_readme.py
       - name: runs pre-commit
         uses: tox-dev/action-pre-commit-uv@v1
+      - name: Commit and push if on PR
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add README.md
+          git commit -m "$GITHUB_SHA Triggered a README.md update"
+          git push origin $GITHUB_REF
+        if: github.event_name == 'pull_request'
+      - name: fail if readme changed and we aren't on PR
+        uses: nickcharlton/diff-check@main
+        if: github.event_name != 'pull_request'
 #      - name: Test with pytest
 #        run: |
 #          uv run python -m pytest  --cov-report xml:pytest.xml --cov=bw_dedup
