@@ -9,7 +9,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -33,12 +33,12 @@ jobs:
         uses: tox-dev/action-pre-commit-uv@v1
       - name: Commit and push if on PR
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
           git add README.md
           timestamp=$(date -u)
           git commit -m "$GITHUB_SHA Triggered a README.md update ${timestamp}" || exit 0
-          git push origin ${{ steps.extract_branch.outputs.branch }}
+          git push
         if: github.event_name == 'pull_request'
       - name: fail if readme changed and we aren't on PR
         uses: nickcharlton/diff-check@main
