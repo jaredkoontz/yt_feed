@@ -20,6 +20,10 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Install the project
         run: uv sync --all-extras --dev
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
       - name: Run Jinja2 script to update README
         run: |
           pwd
@@ -32,8 +36,9 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add README.md
-          git commit -m "$GITHUB_SHA Triggered a README.md update"
-          git push origin $GITHUB_REF
+          timestamp=$(date -u)
+          git commit -m "$GITHUB_SHA Triggered a README.md update ${timestamp}" || exit 0
+          git push
         if: github.event_name == 'pull_request'
       - name: fail if readme changed and we aren't on PR
         uses: nickcharlton/diff-check@main
