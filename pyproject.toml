@@ -8,6 +8,7 @@ dependencies = [
     "dotenv>=0.9.9",
     "flask>=3.1.0",
     "google-api-python-client>=2.165.0",
+    "gunicorn>=23.0.0",
     "isodate>=0.7.2",
     "requests>=2.32.3",
     "yt-dlp>=2025.3.21",
