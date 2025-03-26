@@ -1,4 +1,5 @@
 import datetime
+import os
 
 import isodate
 from flask import render_template
@@ -33,8 +34,7 @@ def render_xml_feed(
         "podcast_type": podcast_type,
         "media_extension": "m4a" if podcast_type == "audio" else "mp4",
     }
-
-    # todo change the domain
+    domain = os.getenv("DOMAIN")
     return render_template(
-        "feed.xml.jinja", videos_data=all_data, DOMAIN="192.168.1.13:5446"
+        "feed.xml.jinja", videos_data=all_data, DOMAIN=domain if domain else 'localhost'
     )
