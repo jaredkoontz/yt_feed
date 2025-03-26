@@ -9,21 +9,21 @@
   <language>en-us</language>
   <generator>yt_feed</generator>
   <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-  <pubDate>XXX ADD LINK</pubDate>
-  <lastBuildDate>XXX ADD LINK</lastBuildDate>
-  <managingEditor>XXX ADD LINK</managingEditor>
-  <webMaster>XXX ADD LINK</webMaster>
+  <pubDate>{{ now }}</pubDate>
+  <lastBuildDate>{{ now }}</lastBuildDate>
+  <managingEditor>Joe Mama</managingEditor>
+  <webMaster>Spider-Man</webMaster>
   <image>
    <title>{{ videos_data['channel_data'].title }}</title>
    <link>https://www.youtube.com/channel/{{ videos_data['channel_data'].id }}</link>
-   <url>{{ videos_data['channel_data'].url }}</url>
+   <url>{{ videos_data['channel_data'].thumbnail_url }}</url>
   </image>
 
   <itunes:author>{{ videos_data['channel_data'].title }}</itunes:author>
   <itunes:explicit>no</itunes:explicit>
-  <itunes:image href="{{ videos_data['channel_data'].url }}"/>
+  <itunes:image href="{{ videos_data['channel_data'].thumbnail_url }}"/>
   <itunes:owner>
-   <itunes:email>XXX ADD LINK</itunes:email>
+   <itunes:email>🥳@🔥.edu</itunes:email>
    <itunes:name>{{ videos_data['channel_data'].title }}</itunes:name>
   </itunes:owner>
   <itunes:subtitle>{{ videos_data['channel_data'].title }}</itunes:subtitle>
@@ -43,7 +43,7 @@
     <guid>https://www.youtube.com/watch?v={{ video_item.id }}</guid>
     <pubDate>{{ video_item.published_at }}</pubDate>
     <itunes:duration>{{ video_item.duration }}</itunes:duration>
-    <author>XXX ADD LINK</author>
+    <author>{{ videos_data['channel_data'].title }}</author>
 
     <itunes:subtitle>{{ video_item.title }}</itunes:subtitle>
     <itunes:summary>{{ video_item.desc }}</itunes:summary>
