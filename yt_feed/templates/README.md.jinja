@@ -1,6 +1,9 @@
 # yt_feed
 
-Create a working RSS feed (for your podcatcher) to turn a youtube channel into a podcast
+Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a podcast.
+
+[![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
+[![Docker](https://github.com/jaredkoontz/yt_feed/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/docker-publish.yml)
 
 [![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
 
