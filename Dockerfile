@@ -9,10 +9,10 @@ RUN sh /uv-installer.sh && rm /uv-installer.sh
 
 ENV PATH="/root/.local/bin/:$PATH"
 
-WORKDIR /code
-
 COPY ./uv.lock /code/uv.lock
 COPY ./pyproject.toml /code/pyproject.toml
+
+WORKDIR /code
 
 RUN uv venv
 RUN uv sync --all-extras --dev
