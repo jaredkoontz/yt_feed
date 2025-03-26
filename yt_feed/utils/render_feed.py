@@ -36,5 +36,8 @@ def render_xml_feed(
     }
     domain = os.getenv("DOMAIN")
     return render_template(
-        "feed.xml.jinja", videos_data=all_data, DOMAIN=domain if domain else "localhost"
+        "feed.xml.jinja",
+        now=datetime.datetime.now(datetime.UTC),
+        videos_data=all_data,
+        DOMAIN=domain if domain else "localhost",
     )
