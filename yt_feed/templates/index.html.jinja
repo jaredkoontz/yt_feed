@@ -23,7 +23,7 @@
         #head {
             background-image: url("https://images.unsplash.com/photo-1705601419334-893631e6d08e?q=80&w=2097&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80");
             background-attachment: fixed;
-            height: 400px;
+            height: 200px;
             padding-left: 50px;
             font-weight: 300;
             background-size: cover; /* Ensures the image covers the entire element */
@@ -86,11 +86,16 @@
 <body>
 <div id="head">
     <div class="header"></div>
-    <h1>yt_feed</h1>
-    <h2>Convert any YouTube channel into a downloadable podcast</h2>
+    <h1>YouTube Feed (yt_feed)</h1>
 </div>
 <div class="how2">
-    {% include 'shared/user_usage.html' %}
+    <p>Convert any YouTube channel or playlist to a podcast. Defaults to audio, but can also do video. This tool will
+        create a feed for your podcatcher, and then handle the streaming of the media when your podcatcher requests
+        it.</p>
+    <br/>
+    <br/>
+    <h2>Usage</h2>
+    {% include 'shared/user_usage.html.jinja' %}
     <br/>
     <br/>
 

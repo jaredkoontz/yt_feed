@@ -12,7 +12,7 @@ def main():
     template = env.get_template("README.md.jinja")
 
     # Render and merge templates
-    rendered_readme = template.render()
+    rendered_readme = template.render(DOMAIN="http://localhost:5446")
 
     # Save to README.md
     with open(root_dir / "README.md", "w", newline="\n") as f:
