@@ -52,6 +52,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <p>Hit subscribe. You&#39;re all set. You can now download and refresh episodes, just like with any other
             podcast.</p>
     </li>
+
 </ol>
 
 ## Dev Instructions
