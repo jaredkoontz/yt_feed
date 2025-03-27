@@ -1,14 +1,13 @@
-import os
 from itertools import islice
 from typing import Callable
 
-from dotenv import load_dotenv
 from googleapiclient.discovery import build
 
 from yt_feed.models.channel_entry import ChannelEntry
 from yt_feed.models.channel_entry import make_channel_entry
 from yt_feed.models.video_entry import make_video_entry
 from yt_feed.models.video_entry import VideoEntry
+from yt_feed.utils import env_vars
 
 _RESULT_SIZE = 50
 _WANTED_PART = "contentDetails,snippet"
@@ -27,9 +26,8 @@ class _YT_Singleton:
     def __init__(self):
         if _YT_Singleton._instance is not None:
             raise RuntimeError("Use get_instance() to access the singleton instance")
-        load_dotenv()
-        youtube_api_key = os.getenv("YOUTUBE_API_KEY")
-        self.youtube = build("youtube", "v3", developerKey=youtube_api_key)
+
+        self.youtube = build("youtube", "v3", developerKey=env_vars.youtube_api_key())
 
 
 def _youtube():
