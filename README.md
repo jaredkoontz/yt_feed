@@ -15,24 +15,24 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             Channel:
             <li><code><a href="https://youtube.com/c/@stuffmadehere">https://youtube.com/c/@stuffmadehere</a></code>
                 <ol>
-                    <li><a href="localhost:5446/c/@stuffmadehere">localhost:5446/c/@stuffmadehere</a></li>
+                    <li><a href="http://localhost:5446/c/@stuffmadehere">http://localhost:5446/c/@stuffmadehere</a></li>
                 </ol>
             </li>
             <li><code><a href="https://youtube.com/c/beardmeatsfood">https://youtube.com/c/beardmeatsfood</a></code>
                 <ol>
-                    <li><a href="localhost:5446/c/beardmeatsfood">localhost:5446/c/beardmeatsfood</a></li>
+                    <li><a href="http://localhost:5446/c/beardmeatsfood">http://localhost:5446/c/beardmeatsfood</a></li>
                 </ol>
             </li>
             Playlist:
             <li><code><a href="https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                 <ol>
-                    <li><a href="localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v">localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</a></li>
+                    <li><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</a></li>
                 </ol>
             </li>
             User:
             <li><code><a href="https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ">https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                 <ol>
-                    <li><a href="localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></li>
+                    <li><a href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></li>
                 </ol>
             </li>
         </ul>
@@ -43,7 +43,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <ul>
             <li><code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
                 <ol>
-                    <li><a href="localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v">localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v</a>
+                    <li><a href="http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v">http://localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v</a>
                     </li>
                 </ol>
             </li>
