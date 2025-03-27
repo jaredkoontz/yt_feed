@@ -10,7 +10,7 @@ from yt_feed.utils.youtube_api_call import yt_playlist
 
 def _create_from_channel(yt_user: str, data_format: str, request_type: bool):
     """
-    A channel and a user are essentially the same thing, but the youtube api will either want am
+    A channel and a user are essentially the same thing, but the YouTube api will either want am
     id or a handle. Thus, the error routes are handled the same way.
     """
     try:

@@ -18,7 +18,6 @@ RUN uv venv
 RUN uv sync --all-extras --dev
 
 COPY ./yt_feed /code/yt_feed
-COPY ./wsgi.py /code/wsgi.py
 COPY ./yt_feed.ini /code/yt_feed.ini
 
 CMD ["uv", "run", "gunicorn", "--conf", "yt_feed/conf/gunicorn_conf.py", "--bind", "0.0.0.0:80", "yt_feed.web_app:app"]

@@ -26,13 +26,15 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             Playlist:
             <li><code><a href="https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</a></li>
+                    <li><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</a>
+                    </li>
                 </ol>
             </li>
             User:
             <li><code><a href="https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ">https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></li>
+                    <li><a href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a>
+                    </li>
                 </ol>
             </li>
         </ul>
@@ -57,8 +59,13 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 
 ## Hosting
 
-We publish a docker container that contains the latest code at `ghcr.io/jaredkoontz/yt_feed:main`. The run command looks
-like:
+### Pre-reqs
+
+You'll need a YouTube api key.
+
+### Docker
+
+We publish a docker container that contains the latest code at `ghcr.io/jaredkoontz/yt_feed:main`.
 
 ```shell
 docker run\
@@ -68,3 +75,13 @@ docker run\
  --rm -d\
  ghcr.io/jaredkoontz/yt_feed:main
 ```
+
+### Local Run
+
+Currently running on python:3.10
+
+1. Install uv
+2. sync envirornment
+   `uv sync`
+3. run flask app
+   ` YOUTUBE_API_KEY=some_key DOMAIN=your_domain && uv run python wsgi.py`

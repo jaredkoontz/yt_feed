@@ -11,8 +11,13 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 
 ## Hosting
 
-We publish a docker container that contains the latest code at `ghcr.io/jaredkoontz/yt_feed:main`. The run command looks
-like:
+### Pre-reqs
+
+You'll need a YouTube api key.
+
+### Docker
+
+We publish a docker container that contains the latest code at `ghcr.io/jaredkoontz/yt_feed:main`.
 
 ```shell
 docker run\
@@ -22,3 +27,13 @@ docker run\
  --rm -d\
  ghcr.io/jaredkoontz/yt_feed:main
 ```
+
+### Local Run
+
+Currently running on python:3.10
+
+1. Install uv
+2. sync envirornment
+   `uv sync`
+3. run flask app
+   ` YOUTUBE_API_KEY=some_key DOMAIN=your_domain && uv run python wsgi.py`
