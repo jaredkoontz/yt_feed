@@ -5,8 +5,6 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 [![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
 [![Docker](https://github.com/jaredkoontz/yt_feed/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/docker-publish.yml)
 
-[![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
-
 ## User Instructions
 
 <p>Convert any YouTube channel or playlist to a podcast. Defaults to audio, but can also do video. This tool will
@@ -52,7 +50,6 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <p>Hit subscribe. You&#39;re all set. You can now download and refresh episodes, just like with any other
             podcast.</p>
     </li>
-
 </ol>
 
 ## Dev Instructions
