@@ -8,49 +8,75 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 ## User Instructions
 
 <p>Convert any YouTube channel or playlist to a podcast. Defaults to audio, but can also do video. This tool will
-    create a feed for your podcatcher, and then handle the streaming of the audio when your podcatcher requests
+    create a feed for your podcatcher, and then handle the streaming of the media when your podcatcher requests
     it.</p>
+<br/>
+<br/>
 <h2>Usage</h2>
 <ol>
     <li>
-        <p>LOREM IPSUM</p>
+        <p>Works on any playlist or channel, simply get the handle or id from the url, and create a new url on
+            this website. Examples:</p>
         <ul>
+            Channel:
+
             <li><code><a href="https://youtube.com/c/@stuffmadehere">https://youtube.com/c/@stuffmadehere</a></code>
+                <ol>
+                    <li><a href="localhost:5446/c/@stuffmadehere">localhost:5446/c/@stuffmadehere</a></li>
+                </ol>
             </li>
-            <ol>
-                <li>/c/@stuffmadehere</li>
-            </ol>
-            <li><code><a href="https://youtube.com/c/stuffmadehere">https://youtube.com/c/stuffmadehere</a></code>
+            <li><code><a href="https://youtube.com/c/beardmeatsfood">https://youtube.com/c/beardmeatsfood</a></code>
+                <ol>
+                    <li><a href="localhost:5446/c/beardmeatsfood">localhost:5446/c/beardmeatsfood</a></li>
+                </ol>
+                Playlist:
+
             </li>
-            <ol>
-                <li>/c/stuffmadehere</li>
-            </ol>
             <li><code><a href="https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
+                <ol>
+                    <li><a href="localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v">localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</a>
+                    </li>
+                </ol>
             </li>
-            <ol>
-                <li>/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</li>
-            </ol>
+            User:
             <li><code><a href="https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ">https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
+                <ol>
+                    <li><a href="localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a>
+                    </li>
+                </ol>
             </li>
-            <ol>
-                <li>/u/UCj1VqrHhDte54oLgPG4xpuQ</li>
-            </ol>
         </ul>
     </li>
 
     <li>
-        <p>audio by default</p>
+        <p> We default to audio only, however, simply tack a `/v/` at the end of the url if you want
+            video instead.</p>
         <ul>
-            <li><code>https:///c/beardmeatsfood/v</code></li>
+            <li><code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
+                <ol>
+                    <li><a href="localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v">localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v</a>
+                    </li>
+                </ol>
+
         </ul>
-        <p>This works for all urls described, simply just append a `/v`</p>
     </li>
 
     <li>
-        <p>Hit subscribe. You&#39;re all set. You can now download and refresh episodes, just like with any other
-            podcast.</p>
+        <p>Add this RSS feed to your podcatcher of choice and pretend that your favorite content creator created a
+            podcast</p>
     </li>
-
 </ol>
 
-## Dev Instructions
+## Hosting
+
+We publish a docker container that contains the latest code at `ghcr.io/jaredkoontz/yt_feed:main`. The run command looks
+like:
+
+```shell
+docker run\
+ -e YOUTUBE_API_KEY="your_key_here"\
+ -e DOMAIN="your_domain_here"\
+ -p 80:80\
+ --rm -d\
+ ghcr.io/jaredkoontz/yt_feed:main
+```
