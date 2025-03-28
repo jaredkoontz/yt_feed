@@ -3,7 +3,7 @@ name = "yt_feed"
 version = "0.1.0"
 description = "Create a working RSS feed (for your podcatcher) to turn a youtube channel into a podcast"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
     "dotenv>=0.9.9",
     "flask>=3.1.0",
