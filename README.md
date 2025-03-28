@@ -76,12 +76,20 @@ docker run\
  ghcr.io/jaredkoontz/yt_feed:main
 ```
 
+Ensure it is running
+
+`curl localhost`
+
 ### Local Run
 
-Currently running on python:3.10
+Currently running on python:3.12
 
 1. Install uv
 2. sync envirornment
    `uv sync`
 3. run flask app
    ` YOUTUBE_API_KEY=some_key DOMAIN=your_domain && uv run python wsgi.py`
+
+Ensure it is running
+
+`curl localhost:5446`
