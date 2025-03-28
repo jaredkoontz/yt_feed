@@ -3,7 +3,8 @@ from flask import make_response
 from flask import Response
 from googleapiclient.errors import HttpError
 
-from yt_feed.utils.render_feed import render_xml_feed
+from yt_feed.models.data_entries import parse_channel_id
+from yt_feed.utils.render_feed import render_rss_feed
 from yt_feed.utils.youtube_api_call import yt_channels
 from yt_feed.utils.youtube_api_call import yt_playlist
 
@@ -21,8 +22,7 @@ def playlist(playlist_id: str, data_format: str) -> Response | str:
     if len(playlist_data) == 0:
         return make_response(f"Empty playlist {playlist_id}", 400)
 
-    # todo worth creating a class for?
-    channel_id = playlist_data[0]["snippet"]["channelId"]
+    channel_id = parse_channel_id(playlist_data)
 
     channel_data = yt_channels(channel_id, user_id=True)
-    return render_xml_feed(playlist_data, channel_data, data_format)
+    return render_rss_feed(playlist_data, channel_data, data_format)

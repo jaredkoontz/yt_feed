@@ -3,15 +3,17 @@ import ssl
 from flask import make_response
 
 from yt_feed.models.errors import BadChannelException
-from yt_feed.utils.render_feed import render_xml_feed
+from yt_feed.utils.render_feed import render_rss_feed
 from yt_feed.utils.youtube_api_call import yt_channels
 from yt_feed.utils.youtube_api_call import yt_playlist
 
 
-def _create_from_channel(yt_user: str, data_format: str, request_type: bool):
+def _create_rss_from_channel(yt_user: str, data_format: str, request_type: bool):
     """
-    A channel and a user are essentially the same thing, but the YouTube api will either want am
-    id or a handle. Thus, the error routes are handled the same way.
+    A channel and a user are essentially the same thing, but the YouTube api will either want an
+    id or a handle.
+
+    Let's treat them the same.
     """
     try:
         channel_data = yt_channels(yt_user, user_id=request_type)
@@ -29,4 +31,4 @@ def _create_from_channel(yt_user: str, data_format: str, request_type: bool):
             "Try again",
             500,
         )
-    return render_xml_feed(playlist_data, channel_data, data_format)
+    return render_rss_feed(playlist_data, channel_data, data_format)
