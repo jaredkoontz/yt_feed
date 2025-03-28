@@ -20,6 +20,6 @@ COPY ./yt_feed /code/yt_feed
 COPY ./yt_feed.ini /code/yt_feed.ini
 
 # we could copy an .env file if we have one.
-COPY .env /code/.env
+COPY .env* /code/.env
 
 CMD ["uv", "run", "gunicorn", "--conf", "yt_feed/conf/gunicorn_conf.py", "--bind", "0.0.0.0:80", "yt_feed.web_app:app"]
