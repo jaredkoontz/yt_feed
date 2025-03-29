@@ -1,12 +1,11 @@
-from itertools import islice
 from typing import Callable
 
 from googleapiclient.discovery import build
 
-from yt_feed.models.channel_entry import ChannelEntry
-from yt_feed.models.channel_entry import make_channel_entry
-from yt_feed.models.video_entry import make_video_entry
-from yt_feed.models.video_entry import VideoEntry
+from yt_feed.models.data_entries import ChannelEntry
+from yt_feed.models.data_entries import make_channel_entry
+from yt_feed.models.data_entries import make_video_entry
+from yt_feed.models.data_entries import VideoEntry
 from yt_feed.utils import env_vars
 
 _RESULT_SIZE = 50
@@ -36,7 +35,7 @@ def _youtube():
 
 def _get_all_items(func: Callable, opts: dict[str, str]) -> list[dict]:
     """
-    Handles the pagination
+    Handles the pagination from the api
     """
 
     data = []
@@ -79,18 +78,9 @@ def yt_playlist(playlist_id: str) -> list[dict]:
 
 
 def yt_videos(video_ids: list[str]) -> list[VideoEntry]:
-    def batch_iterable(iterable, batch_size=_RESULT_SIZE):
-        it = iter(iterable)
-        while batch := list(islice(it, batch_size)):
-            yield batch
-
-    all_videos = []
-    for vid_batch in batch_iterable(video_ids):
-        all_videos.extend(
-            _get_all_items(
-                _youtube().videos,
-                {"id": ",".join(vid_batch), "part": _WANTED_PART},
-            )
-        )
+    all_videos = _get_all_items(
+        _youtube().videos,
+        {"id": ",".join(video_ids), "part": _WANTED_PART},
+    )
     assert len(all_videos) == len(video_ids)
     return [make_video_entry(x) for x in all_videos]

@@ -6,6 +6,10 @@ from yt_feed.models.errors import InvalidConfigException
 
 
 class _EnvVarHelper:
+    """
+    Simple singleton around the instance since we only ever need to load this once.
+    """
+
     def __init__(self):
         load_dotenv()
         self.__domain = os.getenv("DOMAIN")
