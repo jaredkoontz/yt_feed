@@ -38,6 +38,8 @@ def make_channel_entry(raw: dict) -> ChannelEntry:
 
 
 def make_video_entry(raw: dict) -> VideoEntry:
+    # if its a short, don't return it?
+
     title = html.escape(raw["snippet"]["title"])
     desc = html.escape(raw["snippet"]["description"])
     my_id = raw["id"]

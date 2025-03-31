@@ -4,6 +4,7 @@ from flask import Response
 from googleapiclient.errors import HttpError
 
 from yt_feed.models.data_entries import parse_channel_id
+from yt_feed.utils.channel_cache import flask_cache
 from yt_feed.utils.render_feed import render_rss_feed
 from yt_feed.utils.youtube_api_call import yt_channels
 from yt_feed.utils.youtube_api_call import yt_playlist
@@ -13,6 +14,7 @@ playlist_page = Blueprint("playlist_page", __name__)
 
 @playlist_page.route("/p/<playlist_id>", defaults={"data_format": "audio"})
 @playlist_page.route("/p/<playlist_id>/v", defaults={"data_format": "video"})
+@flask_cache.cached()
 def playlist(playlist_id: str, data_format: str) -> Response | str:
     try:
         playlist_data = yt_playlist(playlist_id)

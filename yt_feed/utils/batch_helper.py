@@ -12,5 +12,5 @@ def batch_iter(playlist_data):
     """
     video_ids = [parse_video_id(video_id) for video_id in playlist_data]
     it = iter(video_ids)
-    while batch := list(islice(it, _BATCH_SIZE)):
+    while batch := tuple(islice(it, _BATCH_SIZE)):
         yield batch
