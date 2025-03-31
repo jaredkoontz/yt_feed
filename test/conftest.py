@@ -6,11 +6,14 @@ from yt_feed.web_app import yt_feed_app
 @pytest.fixture()
 def app():
     app = yt_feed_app
-    app.config.update({
-        "TESTING": True,
-    })
+    app.config.update(
+        {
+            "TESTING": True,
+        }
+    )
 
     yield app
+
 
 @pytest.fixture()
 def client(app):
