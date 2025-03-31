@@ -82,5 +82,4 @@ def yt_videos(video_ids: list[str]) -> list[VideoEntry]:
         _youtube().videos,
         {"id": ",".join(video_ids), "part": _WANTED_PART},
     )
-    assert len(all_videos) == len(video_ids)
-    return [make_video_entry(x) for x in all_videos]
+    return [entry for x in all_videos if (entry := make_video_entry(x)) is not None]
