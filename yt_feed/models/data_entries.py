@@ -37,24 +37,27 @@ def make_channel_entry(raw: dict) -> ChannelEntry:
         raise BadChannelException("No items returned, bad channel", "")
 
 
-def make_video_entry(raw: dict) -> VideoEntry:
-    # if its a short, don't return it?
+def make_video_entry(raw: dict) -> VideoEntry | None:
+    # todo if this video is a short, don't return it?
+    # currently there is not a good way from the data returned to see if is a short.
+    try:
+        title = html.escape(raw["snippet"]["title"])
+        desc = html.escape(raw["snippet"]["description"])
+        my_id = raw["id"]
+        published_at_dt = datetime.datetime.strptime(
+            raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"
+        )
+        duration = isodate.parse_duration(raw["contentDetails"]["duration"])
 
-    title = html.escape(raw["snippet"]["title"])
-    desc = html.escape(raw["snippet"]["description"])
-    my_id = raw["id"]
-    published_at_dt = datetime.datetime.strptime(
-        raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"
-    )
-    duration = isodate.parse_duration(raw["contentDetails"]["duration"])
-
-    return VideoEntry(
-        title=title,
-        id=my_id,
-        desc=desc,
-        published_at=published_at_dt.strftime("%a, %d %b %Y %H:%M:%S +0000"),
-        duration=duration,
-    )
+        return VideoEntry(
+            title=title,
+            id=my_id,
+            desc=desc,
+            published_at=published_at_dt.strftime("%a, %d %b %Y %H:%M:%S +0000"),
+            duration=duration,
+        )
+    except KeyError:
+        return None
 
 
 def parse_video_id(item: dict) -> str:
