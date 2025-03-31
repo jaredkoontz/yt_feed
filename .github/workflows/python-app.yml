@@ -39,10 +39,6 @@ jobs:
       - name: fail if readme changed and we aren't on PR
         uses: nickcharlton/diff-check@main
         if: github.event_name != 'pull_request'
-#      - name: Test with pytest
-#        run: |
-#          uv run python -m pytest  --cov-report xml:pytest.xml --cov=bw_dedup
-#        uses: MishaKav/pytest-coverage-comment@main
-#        with:
-#          pytest-coverage-path: ./pytest-coverage.txt
-#          junitxml-path: ./pytest.xml
+      - name: Test with pytest
+        run: |
+          uv run python -m pytest .
