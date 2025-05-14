@@ -10,7 +10,7 @@ download_page = Blueprint("download_page", __name__)
 
 
 @download_page.route("/dl/<media_type>/<video_id>.<suffix>")
-def yt_dl(media_type: str, video_id: str, suffix: str) -> Response | str:
+def yt_dl(media_type: str, video_id: str, suffix: str) -> Response:
     if media_type == "video":
         result = extract_video(video_id)
         r = result["url"]

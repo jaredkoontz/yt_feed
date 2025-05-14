@@ -16,6 +16,7 @@ class _EnvVarHelper:
         self.__yt_api = os.getenv("YOUTUBE_API_KEY")
         if not self.__domain or not self.__yt_api:
             raise InvalidConfigException(self.__domain, self.__yt_api)
+        assert self.__yt_api is not None
 
     @property
     def domain(self):
@@ -30,6 +31,8 @@ _ref = _EnvVarHelper()
 
 
 def domain() -> str:
+    assert _ref is not None
+    assert type(_ref.domain) is str
     return _ref.domain
 
 

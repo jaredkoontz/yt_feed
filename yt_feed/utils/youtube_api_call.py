@@ -77,7 +77,7 @@ def yt_playlist(playlist_id: str) -> list[dict]:
     return _get_all_items(_youtube().playlistItems, opts)
 
 
-def yt_videos(video_ids: list[str]) -> list[VideoEntry]:
+def yt_videos(video_ids: tuple[str, ...]) -> list[VideoEntry]:
     all_videos = _get_all_items(
         _youtube().videos,
         {"id": ",".join(video_ids), "part": _WANTED_PART},
