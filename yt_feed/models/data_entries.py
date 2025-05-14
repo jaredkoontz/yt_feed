@@ -29,7 +29,10 @@ def make_channel_entry(raw: dict) -> ChannelEntry:
         title = html.escape(raw["items"][0]["snippet"]["title"])
         desc = html.escape(raw["items"][0]["snippet"]["description"])
         thumbnail_url = raw["items"][0]["snippet"]["thumbnails"]["high"]["url"]
-        uploads = raw["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+        try:
+            uploads = raw["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+        except KeyError:
+            uploads = None
         return ChannelEntry(
             title=title, desc=desc, thumbnail_url=thumbnail_url, uploads=uploads
         )

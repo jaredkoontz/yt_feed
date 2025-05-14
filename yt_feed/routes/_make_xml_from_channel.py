@@ -23,12 +23,16 @@ def _create_rss_from_channel(yt_user: str, data_format: str, request_type: bool)
             f"It appears that {yt_user} is not a valid {correct_path_choice}.",
             404,
         )
-
-    try:
-        playlist_data = yt_playlist(channel_data.uploads)
     except ssl.SSLError:
         return make_response(
             "Try again",
-            500,
+            503,
+        )
+    try:
+        playlist_data = yt_playlist(channel_data.uploads)
+    except (ssl.SSLError, AttributeError):
+        return make_response(
+            "Try again",
+            503,
         )
     return render_rss_feed(playlist_data, channel_data, data_format)
