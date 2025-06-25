@@ -15,25 +15,25 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             Channel:
             <li><code><a href="https://youtube.com/c/@stuffmadehere">https://youtube.com/c/@stuffmadehere</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/c/@stuffmadehere">http://localhost:5446/c/@stuffmadehere</a></li>
+                    <li><code><a href="http://localhost:5446/c/@stuffmadehere">http://localhost:5446/c/@stuffmadehere</a></code></li>
                 </ol>
             </li>
             <li><code><a href="https://youtube.com/c/beardmeatsfood">https://youtube.com/c/beardmeatsfood</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/c/beardmeatsfood">http://localhost:5446/c/beardmeatsfood</a></li>
+                    <li><code><a href="http://localhost:5446/c/beardmeatsfood">http://localhost:5446/c/beardmeatsfood</a></code></li>
                 </ol>
             </li>
             Playlist:
             <li><code><a href="https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</a>
+                    <li><code><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt/v</a></code>
                     </li>
                 </ol>
             </li>
             User:
             <li><code><a href="https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ">https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a>
+                    <li><code><a href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                     </li>
                 </ol>
             </li>
@@ -45,7 +45,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <ul>
             <li><code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v">http://localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v</a>
+                    <li><code><a href="http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v">http://localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v</a></code>
                     </li>
                 </ol>
             </li>
@@ -59,14 +59,16 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <p>If you want to download a single video, you can use the download route.
             If you want to get video as well as audio, you can use the `/v/` trick on these as well. Examples:</p>
         <ul>
-            <li><code><a href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
+            <li><code><a
+                    href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/dl/Xo3xqm-AtqE/v">http://localhost:5446/dl/Xo3xqm-AtqE/v</a></li>
+                    <li><code><a href="http://localhost:5446/dl/Xo3xqm-AtqE/v">http://localhost:5446/dl/Xo3xqm-AtqE/v</a></code></li>
                 </ol>
             </li>
-            <li><code><a href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
+            <li><code><a
+                    href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
                 <ol>
-                    <li><a href="http://localhost:5446/dl/8kKwfZpbIv8">http://localhost:5446/dl/8kKwfZpbIv8</a></li>
+                    <li><code><a href="http://localhost:5446/dl/8kKwfZpbIv8">http://localhost:5446/dl/8kKwfZpbIv8</a></code></li>
                 </ol>
             </li>
         </ul>
