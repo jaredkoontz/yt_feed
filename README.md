@@ -7,7 +7,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 
 ## User Instructions
 
-<ol>
+<ul>
     <li>
         <p>Works on any playlist or channel, get the handle or id from the url, and create a new url on
             this website. Examples:</p>
@@ -71,7 +71,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             </li>
         </ul>
     </li>
-</ol>
+</ul>
 
 ## Hosting
 
