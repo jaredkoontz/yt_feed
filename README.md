@@ -33,8 +33,8 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             User:
             <li><code><a href="https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ">https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                 <ol>
-                    <li><code><a
-                            href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
+                    <li>
+                        <code><a href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                     </li>
                 </ol>
             </li>
@@ -44,9 +44,11 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <p> We default to audio only, however, tack a `/v/` at the end of the url if you want
             video instead.</p>
         <ul>
-            <li><code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
+            <li>
+                <code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v">http://localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v</a></code>
+                    <li>
+                        <code><a href="http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v">http://localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu/v</a></code>
                     </li>
                 </ol>
             </li>
@@ -57,21 +59,22 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             podcast</p>
     </li>
     <li>
-        <p>If you want to download a single video, you can use the download route.
-            If you want to get video, you can use the `/video/` route instead of '/audio/' on these as well. Make sure
-            you change the extension in the path as well. Examples:</p>
+        <p>If you want to download a single video, you can use the `download` routes. To get video,
+            use the `/video/` route instead of '/audio/' on these as well. Make sure
+            you change the extension in the path as well (m4a for audio, mp4 for video). Examples:</p>
         <ul>
-
-            <li><code><a
-                    href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
+            <li>
+                <code><a href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/dl/8kKwfZpbIv8.m4a">http://localhost:5446/dl/8kKwfZpbIv8.m4a</a></code></li>
+                    <li><code><a href="http://localhost:5446/dl/audio/8kKwfZpbIv8.m4a">http://localhost:5446/dl/audio/8kKwfZpbIv8.m4a</a></code>
+                    </li>
                 </ol>
             </li>
-            <li><code><a
-                    href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
+            <li>
+                <code><a href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/dl/video/Xo3xqm-AtqE.mp4">http://localhost:5446/dl/video/Xo3xqm-AtqE.mp4</a></code></li>
+                    <li><code><a href="http://localhost:5446/dl/video/Xo3xqm-AtqE.mp4">http://localhost:5446/dl/video/Xo3xqm-AtqE.mp4</a></code>
+                    </li>
                 </ol>
             </li>
         </ul>
