@@ -9,7 +9,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 
 <ol>
     <li>
-        <p>Works on any playlist or channel, simply get the handle or id from the url, and create a new url on
+        <p>Works on any playlist or channel, get the handle or id from the url, and create a new url on
             this website. Examples:</p>
         <ul>
             Channel:
@@ -40,7 +40,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         </ul>
     </li>
     <li>
-        <p> We default to audio only, however, simply tack a `/v/` at the end of the url if you want
+        <p> We default to audio only, however, tack a `/v/` at the end of the url if you want
             video instead.</p>
         <ul>
             <li><code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
@@ -54,6 +54,22 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
     <li>
         <p>Add this RSS feed to your podcatcher of choice and pretend that your favorite content creator created a
             podcast</p>
+    </li>
+    <li>
+        <p>If you want to download a single video, you can use the download route.
+            If you want to get video as well as audio, you can use the `/v/` trick on these as well. Examples:</p>
+        <ul>
+            <li><code><a href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
+                <ol>
+                    <li><a href="http://localhost:5446/dl/Xo3xqm-AtqE/v">http://localhost:5446/dl/Xo3xqm-AtqE/v</a></li>
+                </ol>
+            </li>
+            <li><code><a href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
+                <ol>
+                    <li><a href="http://localhost:5446/dl/8kKwfZpbIv8">http://localhost:5446/dl/8kKwfZpbIv8</a></li>
+                </ol>
+            </li>
+        </ul>
     </li>
 </ol>
 
