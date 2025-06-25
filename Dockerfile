@@ -17,7 +17,7 @@ RUN uv venv
 RUN uv sync --all-extras --dev
 
 COPY ./yt_feed /code/yt_feed
-COPY ./yt_feed.ini /code/yt_feed.ini
+COPY config/yt_feed.ini /code/yt_feed.ini
 
 # we could copy an .env file if we have one.
 COPY .env* /code/.env
