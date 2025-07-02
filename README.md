@@ -24,13 +24,13 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
                 </ol>
             </li>
             Playlist:
-            <li><code><a href="https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
+            <li>
+                <code><a href="https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                 <ol>
                     <li><code><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                     </li>
                 </ol>
             </li>
-            <li>
             <li>
                 <code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
                 <ol>
@@ -60,14 +60,14 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             <li>
                 <code><a href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/dl/8kKwfZpbIv8.m4a">http://localhost:5446/dl/audio/8kKwfZpbIv8.m4a</a></code>
+                    <li><code><a href="http://localhost:5446/dl/8kKwfZpbIv8.m4a">http://localhost:5446/dl/8kKwfZpbIv8.m4a</a></code>
                     </li>
                 </ol>
             </li>
             <li>
                 <code><a href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/dl/Xo3xqm-AtqE.m4a">http://localhost:5446/dl/video/Xo3xqm-AtqE.m4a</a></code>
+                    <li><code><a href="http://localhost:5446/dl/Xo3xqm-AtqE.m4a">http://localhost:5446/dl/Xo3xqm-AtqE.m4a</a></code>
                     </li>
                 </ol>
             </li>
