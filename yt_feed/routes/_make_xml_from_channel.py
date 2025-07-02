@@ -4,8 +4,8 @@ from flask import make_response
 
 from yt_feed.models.errors import BadChannelException
 from yt_feed.utils.render_feed import render_rss_feed
-from yt_feed.utils.youtube_api_call import yt_channels
-from yt_feed.utils.youtube_api_call import yt_playlist
+from yt_feed.utils.yt_api_wrapper import yt_channels
+from yt_feed.utils.yt_api_wrapper import yt_playlist
 
 
 def _create_rss_from_channel(yt_user: str, data_format: str, request_type: bool):

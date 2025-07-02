@@ -6,8 +6,8 @@ from googleapiclient.errors import HttpError
 from yt_feed.models.data_entries import parse_channel_id
 from yt_feed.utils.channel_cache import flask_cache
 from yt_feed.utils.render_feed import render_rss_feed
-from yt_feed.utils.youtube_api_call import yt_channels
-from yt_feed.utils.youtube_api_call import yt_playlist
+from yt_feed.utils.yt_api_wrapper import yt_channels
+from yt_feed.utils.yt_api_wrapper import yt_playlist
 
 playlist_page = Blueprint("playlist_page", __name__)
 

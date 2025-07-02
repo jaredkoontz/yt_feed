@@ -13,24 +13,8 @@ _WANTED_PART = "contentDetails,snippet"
 _YOUTUBE = None
 
 
-class _YT_Singleton:
-    _instance = None
-
-    @classmethod
-    def get_instance(cls):
-        if cls._instance is None:
-            cls._instance = cls()
-        return cls._instance
-
-    def __init__(self):
-        if _YT_Singleton._instance is not None:
-            raise RuntimeError("Use get_instance() to access the singleton instance")
-
-        self.youtube = build("youtube", "v3", developerKey=env_vars.youtube_api_key())
-
-
 def _youtube():
-    return _YT_Singleton.get_instance().youtube
+    return build("youtube", "v3", developerKey=env_vars.youtube_api_key())
 
 
 def _get_all_items(func: Callable, opts: dict[str, str]) -> list[dict]:
