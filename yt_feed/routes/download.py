@@ -13,7 +13,15 @@ download_page = Blueprint("download_page", __name__)
 def yt_dl(media_type: str, video_id: str, suffix: str) -> Response:
     if media_type == "video":
         result = extract_video(video_id)
-        r = result["url"]
+        best_video = max(
+            [
+                f
+                for f in result["formats"]
+                if f.get("vcodec") != "none" and f.get("acodec") == "none"
+            ],
+            key=lambda f: f.get("height") or 0,
+        )
+        r = best_video["url"]
 
     elif media_type == "audio":
         result = extract_audio(video_id)
