@@ -7,8 +7,7 @@ from yt_feed.utils.channel_cache import flask_cache
 channel_page = Blueprint("channel_page", __name__)
 
 
-@channel_page.route("/c/<yt_user>", defaults={"data_format": "audio"})
-@channel_page.route("/c/<yt_user>/v", defaults={"data_format": "video"})
+@channel_page.route("/c/<yt_user>")
 @flask_cache.cached()
-def channel(yt_user: str, data_format: str) -> Response | str:
-    return _create_rss_from_channel(yt_user, data_format, False)
+def channel(yt_user: str) -> Response | str:
+    return _create_rss_from_channel(yt_user, False)
