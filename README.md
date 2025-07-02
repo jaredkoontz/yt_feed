@@ -49,7 +49,6 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             </li>
         </ul>
     </li>
-
     <li>
         <p>Add this RSS feed to your podcatcher of choice and pretend that your favorite content creator created a
             podcast</p>
