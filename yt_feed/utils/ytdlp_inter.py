@@ -8,7 +8,7 @@ def _data(url: str, ydl_opts: dict[str, str]) -> dict:
 
 def extract_video(url: str) -> dict:
     ydl_audio_opts = {
-        "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"
+        "format": "bestvideo[ext=mp4]+bestaudio[ext=mp4]/mp4+best[height<=480]"
     }
     return _data(url, ydl_audio_opts)
 
