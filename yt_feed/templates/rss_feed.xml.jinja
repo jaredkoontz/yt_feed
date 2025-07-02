@@ -38,7 +38,7 @@
     <link>https://www.youtube.com/watch?v={{ video_item.id }}</link>
     <description>{{ video_item.desc }}</description>
     <enclosure
-      url="{{ DOMAIN }}/dl/{{ videos_data['podcast_type'] }}/{{ video_item.id }}.{{ videos_data['media_extension'] }}"
+      url="{{ DOMAIN }}/dl/{{ video_item.id }}.{{ videos_data['media_extension'] }}"
       type="{{ videos_data['podcast_type'] }}/{{ videos_data['media_extension'] }}"/>
     <guid>https://www.youtube.com/watch?v={{ video_item.id }}</guid>
     <pubDate>{{ video_item.published_at }}</pubDate>
