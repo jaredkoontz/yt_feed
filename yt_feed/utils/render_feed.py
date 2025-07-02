@@ -5,7 +5,7 @@ from flask import render_template
 from yt_feed.models.data_entries import ChannelEntry
 from yt_feed.utils.batch_helper import batch_iter
 from yt_feed.utils.env_vars import domain
-from yt_feed.utils.youtube_api_call import yt_videos
+from yt_feed.utils.yt_api_wrapper import yt_videos
 
 
 def render_rss_feed(

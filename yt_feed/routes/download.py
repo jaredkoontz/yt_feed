@@ -3,8 +3,8 @@ from flask import make_response
 from flask import redirect
 from flask import Response
 
-from yt_feed.utils.ytdl_inter import extract_audio
-from yt_feed.utils.ytdl_inter import extract_video
+from yt_feed.utils.ytdlp_inter import extract_audio
+from yt_feed.utils.ytdlp_inter import extract_video
 
 download_page = Blueprint("download_page", __name__)
 
