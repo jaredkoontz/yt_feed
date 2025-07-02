@@ -3,21 +3,19 @@ import yt_dlp
 
 def _data(url: str, ydl_opts: dict[str, str]) -> dict:
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        # could download with
-        # error_code = ydl.download(url)
-        info = ydl.extract_info(url, download=False)
-        return info
+        return ydl.extract_info(url, download=False)
 
 
 def extract_video(url: str) -> dict:
-    # "format": "22/best" could be used?
-    return _data(url, {})
+    ydl_audio_opts = {
+        "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"
+    }
+    return _data(url, ydl_audio_opts)
 
 
 def extract_audio(url: str) -> dict:
     ydl_audio_opts = {
         "format": "m4a/bestaudio/best",
-        # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
         "postprocessors": [
             {
                 # Extract audio using ffmpeg
