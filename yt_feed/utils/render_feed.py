@@ -16,8 +16,6 @@ def render_rss_feed(playlist_data: list[dict], channel_data: ChannelEntry):
     all_data = {
         "video_info": videos_data,
         "channel_data": channel_data,
-        "podcast_type": "audio",
-        "media_extension": "m4a",
     }
     return render_template(
         "rss_feed.xml.jinja",
