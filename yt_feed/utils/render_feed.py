@@ -19,7 +19,7 @@ def render_rss_feed(
         "video_info": videos_data,
         "channel_data": channel_data,
         "podcast_type": podcast_type,
-        "media_extension": "m4a" if podcast_type == "audio" else "mp4",
+        "media_extension": "m4a",
     }
     return render_template(
         "rss_feed.xml.jinja",

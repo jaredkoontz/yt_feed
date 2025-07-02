@@ -12,10 +12,9 @@ from yt_feed.utils.yt_api_wrapper import yt_playlist
 playlist_page = Blueprint("playlist_page", __name__)
 
 
-@playlist_page.route("/p/<playlist_id>", defaults={"data_format": "audio"})
-@playlist_page.route("/p/<playlist_id>/v", defaults={"data_format": "video"})
+@playlist_page.route("/p/<playlist_id>")
 @flask_cache.cached()
-def playlist(playlist_id: str, data_format: str) -> Response | str:
+def playlist(playlist_id: str) -> Response | str:
     try:
         playlist_data = yt_playlist(playlist_id)
     except HttpError as e:
@@ -27,4 +26,4 @@ def playlist(playlist_id: str, data_format: str) -> Response | str:
     channel_id = parse_channel_id(playlist_data)
 
     channel_data = yt_channels(channel_id, user_id=True)
-    return render_rss_feed(playlist_data, channel_data, data_format)
+    return render_rss_feed(playlist_data, channel_data)

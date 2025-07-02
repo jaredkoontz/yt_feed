@@ -8,7 +8,7 @@ from yt_feed.utils.yt_api_wrapper import yt_channels
 from yt_feed.utils.yt_api_wrapper import yt_playlist
 
 
-def _create_rss_from_channel(yt_user: str, data_format: str, request_type: bool):
+def _create_rss_from_channel(yt_user: str, request_type: bool):
     """
     A channel and a user are essentially the same thing, but the YouTube api will either want an
     id or a handle.
@@ -35,4 +35,4 @@ def _create_rss_from_channel(yt_user: str, data_format: str, request_type: bool)
             "Try again",
             503,
         )
-    return render_rss_feed(playlist_data, channel_data, data_format)
+    return render_rss_feed(playlist_data, channel_data)
