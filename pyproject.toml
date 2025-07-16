@@ -1,6 +1,6 @@
 [project]
 name = "yt_feed"
-version = "0.2.0"
+version = "0.3.0"
 description = "Create a working RSS feed (for your podcatcher) to turn a youtube channel into an audio podcast"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -17,14 +17,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "black>=25.1.0",
     "pre-commit>=4.1.0",
     "pytest>=8.3.5",
     "pytest-cov>=6.0.0",
-    "ruff>=0.11.0",
 ]
-
-[tool.pyright]
-# ...
-venvPath = "."
-venv = ".venv"
