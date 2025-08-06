@@ -25,14 +25,14 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             </li>
             Playlist:
             <li>
-                <code><a href="https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/watch?v=KMd5czoOW-Q&list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
+                <code><a href="https://www.youtube.com/playlist?list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/playlist?list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                 <ol>
                     <li><code><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                     </li>
                 </ol>
             </li>
             <li>
-                <code><a href="https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/watch?v=jX4LEyTgZNQ&list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
+                <code><a href="https://www.youtube.com/playlist?list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/playlist?list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
                 <ol>
                     <li>
                         <code><a href="http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">http://localhost:5446/u/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
