@@ -20,7 +20,9 @@ COPY config/yt_feed.ini /code/yt_feed.ini
 
 RUN uv sync --all-extras --dev
 
+RUN rm -rf code/README.md code/yt_feed
+
 # we could copy an .env file if we have one.
 COPY .env* /code/.env
 
-CMD ["uv", "run", "gunicorn", "--conf", "yt_feed/conf/gunicorn_conf.py", "--bind", "0.0.0.0:80", "yt_feed.web_app:yt_feed_app"]
+CMD ["uv", "run", "gunicorn", "--conf", "yt_feed.conf.gunicorn_conf.py", "--bind", "0.0.0.0:80", "yt_feed.web_app:yt_feed_app"]
