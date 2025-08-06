@@ -14,9 +14,9 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <ul>
             Channel (channel handle):
             <li>
-                <code><a href="https://youtube.com/c/@stuffmadehere">https://youtube.com/c/@stuffmadehere</a></code>
+                <code><a href="https://youtube.com/c/@AdamNeely">https://youtube.com/c/@AdamNeely</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/c/@stuffmadehere">http://localhost:5446/c/@stuffmadehere</a></code></li>
+                    <li><code><a href="http://localhost:5446/c/@AdamNeely">http://localhost:5446/c/@AdamNeely</a></code></li>
                 </ol>
             </li>
             <li>
@@ -43,11 +43,11 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
                 </ol>
             </li>
             User (channel id):
-            <li><code><a href="https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ">https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
+            <li><code><a href="https://www.youtube.com/channel/UCnkp4xDOwqqJD7sSM3xdUiQ">https://www.youtube.com/channel/UCnkp4xDOwqqJD7sSM3xdUiQ</a></code>
                 <ol>
                     <li>
                         <code><a
-                                href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
+                                href="http://localhost:5446/u/UCnkp4xDOwqqJD7sSM3xdUiQ">http://localhost:5446/u/UCnkp4xDOwqqJD7sSM3xdUiQ</a></code>
                     </li>
                 </ol>
             </li>
