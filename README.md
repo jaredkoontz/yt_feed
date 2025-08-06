@@ -13,12 +13,14 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             Examples:</p>
         <ul>
             Channel (grabs channel id):
-            <li><code><a href="https://youtube.com/c/@stuffmadehere">https://youtube.com/c/@stuffmadehere</a></code>
+            <li>
+                <code><a href="https://youtube.com/c/@stuffmadehere">https://youtube.com/c/@stuffmadehere</a></code>
                 <ol>
                     <li><code><a href="http://localhost:5446/c/@stuffmadehere">http://localhost:5446/c/@stuffmadehere</a></code></li>
                 </ol>
             </li>
-            <li><code><a href="https://youtube.com/c/beardmeatsfood">https://youtube.com/c/beardmeatsfood</a></code>
+            <li>
+                <code><a href="https://youtube.com/c/beardmeatsfood">https://youtube.com/c/beardmeatsfood</a></code>
                 <ol>
                     <li><code><a href="http://localhost:5446/c/beardmeatsfood">http://localhost:5446/c/beardmeatsfood</a></code></li>
                 </ol>
@@ -57,7 +59,6 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
                     </li>
                 </ol>
             </li>
-
         </ul>
     </li>
     <li>
@@ -72,7 +73,8 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
                 <code><a
                         href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/dl/8kKwfZpbIv8.m4a">http://localhost:5446/dl/8kKwfZpbIv8.m4a</a></code>
+                    <li>
+                        <code><a href="http://localhost:5446/dl/8kKwfZpbIv8.m4a">http://localhost:5446/dl/8kKwfZpbIv8.m4a</a></code>
                     </li>
                 </ol>
             </li>
@@ -80,7 +82,8 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
                 <code><a
                         href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/dl/Xo3xqm-AtqE.m4a">http://localhost:5446/dl/Xo3xqm-AtqE.m4a</a></code>
+                    <li>
+                        <code><a href="http://localhost:5446/dl/Xo3xqm-AtqE.m4a">http://localhost:5446/dl/Xo3xqm-AtqE.m4a</a></code>
                     </li>
                 </ol>
             </li>
