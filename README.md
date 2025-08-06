@@ -47,7 +47,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
                 <ol>
                     <li>
                         <code><a
-                                href="http://localhost:5446/u/UCnkp4xDOwqqJD7sSM3xdUiQ">http://localhost:5446/u/UCnkp4xDOwqqJD7sSM3xdUiQ</a></code>
+                                href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                     </li>
                 </ol>
             </li>
