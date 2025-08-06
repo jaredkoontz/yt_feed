@@ -14,10 +14,11 @@ COPY ./pyproject.toml /code/pyproject.toml
 WORKDIR /code
 
 RUN uv venv
-RUN uv sync --all-extras --dev
-
 COPY ./yt_feed /code/yt_feed
+COPY ./README.md /code/README.md
 COPY config/yt_feed.ini /code/yt_feed.ini
+
+RUN uv sync --all-extras --dev
 
 # we could copy an .env file if we have one.
 COPY .env* /code/.env

@@ -14,9 +14,9 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <ul>
             Channel (channel handle):
             <li>
-                <code><a href="https://youtube.com/c/@stuffmadehere">https://youtube.com/c/@stuffmadehere</a></code>
+                <code><a href="https://youtube.com/c/@AdamNeely">https://youtube.com/c/@AdamNeely</a></code>
                 <ol>
-                    <li><code><a href="http://localhost:5446/c/@stuffmadehere">http://localhost:5446/c/@stuffmadehere</a></code></li>
+                    <li><code><a href="http://localhost:5446/c/@AdamNeely">http://localhost:5446/c/@AdamNeely</a></code></li>
                 </ol>
             </li>
             <li>

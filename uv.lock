@@ -685,7 +685,7 @@ wheels = [
 [[package]]
 name = "yt-feed"
 version = "0.3.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "dotenv" },
     { name = "flask" },
