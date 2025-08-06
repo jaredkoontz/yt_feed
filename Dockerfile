@@ -15,6 +15,7 @@ WORKDIR /code
 
 RUN uv venv
 COPY ./yt_feed /code/yt_feed
+COPY ./README.md /code/README.md
 COPY config/yt_feed.ini /code/yt_feed.ini
 
 RUN uv sync --all-extras --dev
