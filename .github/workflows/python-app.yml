@@ -35,12 +35,16 @@ jobs:
       - name: Install the project
         run: uv sync --locked --all-extras --dev
 
+
+      - name: install-precommit
+        run: uv tool install pre-commit
+
       - name: Run Jinja2 script to update README
         run: |
           uv run python tools/update_readme.py
 
-      - name: runs pre-commit
-        uses: tox-dev/action-pre-commit-uv@v1
+      - name: run-precommit
+        run: pre-commit run --show-diff-on-failure --color=always -a
 
       - name: Commit and push if on PR
         run: |
