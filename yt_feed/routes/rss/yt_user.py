@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import Response
 
-from yt_feed.routes._make_xml_from_channel import _create_rss_from_channel
+from yt_feed.routes.rss._make_xml_from_channel import _create_rss_from_channel
 from yt_feed.utils.channel_cache import flask_cache
 
 user_page = Blueprint("user_page", __name__)
