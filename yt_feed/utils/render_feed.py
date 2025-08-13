@@ -1,5 +1,7 @@
 import datetime
+from email.utils import format_datetime
 
+from flask import make_response
 from flask import render_template
 
 from yt_feed.models.data_entries import ChannelEntry
@@ -17,9 +19,12 @@ def render_rss_feed(playlist_data: list[dict], channel_data: ChannelEntry):
         "video_info": videos_data,
         "channel_data": channel_data,
     }
-    return render_template(
+    rss_xml = render_template(
         "rss_feed.xml.jinja",
-        now=datetime.datetime.now(datetime.UTC),
+        now=format_datetime(datetime.datetime.now(datetime.UTC), usegmt=True),
         videos_data=all_data,
         DOMAIN=domain(),
     )
+    response = make_response(rss_xml)
+    response.headers["Content-Type"] = "application/xml; charset=utf-8"
+    return response

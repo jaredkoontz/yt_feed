@@ -25,5 +25,7 @@ def playlist(playlist_id: str) -> Response | str:
 
     channel_id = parse_channel_id(playlist_data)
 
-    channel_data = yt_channels(channel_id, user_id=True)
+    channel_data = yt_channels(
+        channel_id, True, f"https://www.youtube.com/playlist?list={playlist_id}"
+    )
     return render_rss_feed(playlist_data, channel_data)

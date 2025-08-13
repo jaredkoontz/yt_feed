@@ -43,17 +43,14 @@ def _get_all_items(func: Callable, opts: dict[str, str]) -> list[dict]:
     return data
 
 
-def yt_channels(username_or_id: str, user_id: bool) -> ChannelEntry:
-    if user_id:
-        opts = {"id": username_or_id}
-    else:
-        opts = {"forHandle": username_or_id}
+def yt_channels(username_or_id: str, is_id: bool, channel_url: str) -> ChannelEntry:
+    opts = {"id": username_or_id} if is_id else {"forHandle": username_or_id}
 
     # we are not paginating here
     request = (
         _youtube().channels().list(**opts, part=_WANTED_PART, maxResults=_RESULT_SIZE)
     )
-    return make_channel_entry(request.execute())
+    return make_channel_entry(request.execute(), channel_url)
 
 
 def yt_playlist(playlist_id: str) -> list[dict]:

@@ -13,6 +13,7 @@ class ChannelEntry:
     desc: str
     thumbnail_url: str
     uploads: str
+    url: str
 
 
 @dataclasses.dataclass
@@ -24,7 +25,14 @@ class VideoEntry:
     duration: str
 
 
-def make_channel_entry(raw: dict) -> ChannelEntry:
+def make_channel_entry(raw: dict, channel_url: str) -> ChannelEntry:
+    """
+    channel url is explicitly passed because if the feed elements are created from a channel or
+    a user, we can just link the source url to the channel that uploaded the videos.
+    If it is from a playlist, we want to link to the playlist itself.
+    There might be a way to create the url from the elements given to us from youtube,
+    but this seems more explicit.
+    """
     if raw.get("items"):
         title = html.escape(raw["items"][0]["snippet"]["title"])
         desc = html.escape(raw["items"][0]["snippet"]["description"])
@@ -34,7 +42,11 @@ def make_channel_entry(raw: dict) -> ChannelEntry:
         except KeyError:
             uploads = None
         return ChannelEntry(
-            title=title, desc=desc, thumbnail_url=thumbnail_url, uploads=uploads
+            title=title,
+            desc=desc,
+            thumbnail_url=thumbnail_url,
+            uploads=uploads,
+            url=channel_url,
         )
     else:
         raise BadChannelException("No items returned, bad channel", "")
