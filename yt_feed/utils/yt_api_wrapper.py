@@ -51,9 +51,14 @@ def yt_channels(username_or_id: str, is_id: bool, channel_url: str) -> ChannelEn
     return ChannelEntry.construct(request.execute(), channel_url)
 
 
-def yt_playlist(playlist_id: str) -> list[dict]:
+def yt_playlist_items(playlist_id: str) -> list[dict]:
     opts = {"playlistId": playlist_id, "part": _ALL_DETAILS}
     return _get_all_items(_youtube().playlistItems, opts)
+
+
+def yt_playlist_info(playlist_id: str) -> list[dict]:
+    opts = {"id": playlist_id, "part": _SNIPPET}
+    return _get_all_items(_youtube().playlists, opts)
 
 
 def yt_videos(video_ids: tuple[str, ...]) -> list[VideoEntry]:

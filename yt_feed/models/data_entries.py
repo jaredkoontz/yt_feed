@@ -14,7 +14,6 @@ class ChannelEntry:
     title: str
     desc: str
     thumbnail_url: str
-    uploads: str
     url: str
 
     @classmethod
@@ -49,28 +48,15 @@ def _normalize_channel_dict(raw: dict[str, Any], wanted_url: str) -> dict[str, s
       - Manual dict: {"title": ...}
     into: {"title", "desc", "thumbnail_url", "uploads", "url"}
     """
-    if "items" in raw:
-        items = raw.get("items") or []
-        if not items:
-            raise BadChannelException("No items found in YT response", "")
-
-        first_item = items[0]
-        snippet = first_item.get("snippet") or {}
-        content_details = first_item.get("contentDetails") or {}
-        related = content_details.get("relatedPlaylists") or {}
-        thumbs = snippet.get("thumbnails") or {}
-        high = thumbs.get("high") or {}
-
-        title = snippet.get("title") or ""
-        desc = snippet.get("description") or ""
-        thumbnail_url = high.get("url")
-        uploads = related.get("uploads")
+    if raw.get("items"):
+        title = html.escape(raw["items"][0]["snippet"]["title"])
+        desc = html.escape(raw["items"][0]["snippet"]["description"])
+        thumbnail_url = raw["items"][0]["snippet"]["thumbnails"]["high"]["url"]
 
     else:
         title = raw.get("title")
         desc = raw.get("desc") or raw.get("description")
         thumbnail_url = raw.get("thumbnail_url")
-        uploads = raw.get("uploads")
 
     if not title or desc is None:
         raise BadChannelException("No items returned, bad channel", "")
@@ -79,7 +65,6 @@ def _normalize_channel_dict(raw: dict[str, Any], wanted_url: str) -> dict[str, s
         "title": title,
         "desc": desc,
         "thumbnail_url": thumbnail_url,
-        "uploads": uploads,
         "url": wanted_url,
     }
 
@@ -105,6 +90,14 @@ def _normalize_video_entry(raw: dict) -> dict[str, str] | None:
         }
     except KeyError:
         return None
+
+
+def parse_playlist_info(item: dict) -> dict[str, str]:
+    return {
+        "title": f"{item['snippet']['title']} - {item['snippet']['channelTitle']}",
+        "desc": item["snippet"]["description"],
+        "thumbnail_url": item["snippet"]["thumbnails"]["high"]["url"],
+    }
 
 
 def parse_video_id(item: dict) -> str:
