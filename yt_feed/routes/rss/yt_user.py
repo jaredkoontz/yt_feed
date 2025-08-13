@@ -10,4 +10,6 @@ user_page = Blueprint("user_page", __name__)
 @user_page.route("/u/<yt_user>")
 @flask_cache.cached()
 def channel(yt_user: str) -> Response | str:
-    return _create_rss_from_channel(yt_user, True)
+    return _create_rss_from_channel(
+        yt_user, True, f"https://www.youtube.com/channel/{yt_user}"
+    )

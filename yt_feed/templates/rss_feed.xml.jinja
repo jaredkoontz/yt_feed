@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss
-  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     version="2.0">
  <channel>
   <title>{{ videos_data['channel_data'].title }}</title>
-  <link>
-   https://www.youtube.com/channel/{{ videos_data['channel_data'].id }}</link>
+  <link>{{ videos_data['channel_data'].url }}</link>
   <description>{{ videos_data['channel_data'].desc }}</description>
   <language>en-us</language>
   <generator>yt_feed</generator>
@@ -20,7 +19,7 @@
   </image>
 
   <itunes:author>{{ videos_data['channel_data'].title }}</itunes:author>
-  <itunes:explicit>no</itunes:explicit>
+  <itunes:explicit>false</itunes:explicit>
   <itunes:image href="{{ videos_data['channel_data'].thumbnail_url }}"/>
   <itunes:owner>
    <itunes:email>🥳@🔥.edu</itunes:email>
@@ -30,7 +29,9 @@
   <itunes:summary>{{ videos_data['channel_data'].desc }}</itunes:summary>
   <itunes:block>no</itunes:block>
   <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml"
-               href="{{ DOMAIN }}/channel/{{ videos_data['video_info'][0]['id'] }}"/>
+               href="{{ DOMAIN }}/channel/{{ videos_data['video_info'][0]['id'] }}"
+    {# TODO this is supposed to be a self referential link of the original request #}
+  />
 
   {% for video_item in videos_data['video_info'] %}
    <item>
@@ -39,12 +40,13 @@
     <description>{{ video_item.desc }}</description>
     <enclosure
       url="{{ DOMAIN }}/dl/{{ video_item.id }}.m4a"
-      type="audio/m4a"/>
+      type="audio/m4a"
+      {# TODO missing length here #}
+    />
     <guid>https://www.youtube.com/watch?v={{ video_item.id }}</guid>
     <pubDate>{{ video_item.published_at }}</pubDate>
     <itunes:duration>{{ video_item.duration }}</itunes:duration>
     <author>{{ videos_data['channel_data'].title }}</author>
-
     <itunes:subtitle>{{ video_item.title }}</itunes:subtitle>
     <itunes:summary>{{ video_item.desc }}</itunes:summary>
    </item>
