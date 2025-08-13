@@ -5,7 +5,7 @@ from flask import make_response
 from yt_feed.models.errors import BadChannelException
 from yt_feed.utils.render_feed import render_rss_feed
 from yt_feed.utils.yt_api_wrapper import yt_channels
-from yt_feed.utils.yt_api_wrapper import yt_playlist
+from yt_feed.utils.yt_api_wrapper import yt_playlist_items
 
 
 def _create_rss_from_channel(yt_user: str, request_type: bool, channel_url: str):
@@ -29,7 +29,7 @@ def _create_rss_from_channel(yt_user: str, request_type: bool, channel_url: str)
             503,
         )
     try:
-        playlist_data = yt_playlist(channel_data.uploads)
+        playlist_data = yt_playlist_items(channel_data.uploads)
     except (ssl.SSLError, AttributeError):
         return make_response(
             "Try again",
