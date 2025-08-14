@@ -3,10 +3,11 @@
      version="2.0">
  <channel>
   <title>{{ videos_data['channel_data'].title }}</title>
-  <link>{{ videos_data['channel_data'].url }}</link>
+  <link>{{ videos_data['channel_data'].originating_url }}</link>
   <description>{{ videos_data['channel_data'].desc }}</description>
   <language>en-us</language>
   <generator>yt_feed</generator>
+  <itunes:category text="yt_feed" />
   <docs>http://blogs.law.harvard.edu/tech/rss</docs>
   <pubDate>{{ now }}</pubDate>
   <lastBuildDate>{{ now }}</lastBuildDate>
@@ -14,7 +15,7 @@
   <webMaster>Spider-Man</webMaster>
   <image>
    <title>{{ videos_data['channel_data'].title }}</title>
-   <link>{{ videos_data['channel_data'].url }}</link>
+   <link>{{ videos_data['channel_data'].originating_url }}</link>
    <url>{{ videos_data['channel_data'].thumbnail_url }}</url>
   </image>
 
@@ -37,20 +38,19 @@
    <item>
     <title>{{ video_item.title }}</title>
     <link>https://www.youtube.com/watch?v={{ video_item.id }}</link>
-    <description>{{ video_item.desc }}</description>
     <enclosure
       url="{{ DOMAIN }}/dl/{{ video_item.id }}.m4a"
       type="audio/m4a"
       {# TODO missing length here #}
     />
+    <itunes:image href="{{ video_item.thumbnail }}" />
+    <description>{{ video_item.desc }}</description>
     <guid>https://www.youtube.com/watch?v={{ video_item.id }}</guid>
     <pubDate>{{ video_item.published_at }}</pubDate>
     <itunes:duration>{{ video_item.duration }}</itunes:duration>
     <author>{{ videos_data['channel_data'].title }}</author>
     <itunes:subtitle>{{ video_item.title }}</itunes:subtitle>
     <itunes:summary>{{ video_item.desc }}</itunes:summary>
-    <itunes:image href="{{ video_item.thumbnail }}" />
-
    </item>
   {% endfor %}
  </channel>
