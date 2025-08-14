@@ -17,12 +17,42 @@ class ChannelEntry:
     url: str
 
     @classmethod
-    def construct(cls, raw: dict[str, Any], wanted_url) -> "ChannelEntry":
+    def construct(cls, raw: dict[str, Any], wanted_url) -> Self:
         """
         Accepts either a YT API response dict or a hand-made dict and constructs ChannelEntry.
         """
-        normalized = _normalize_channel_dict(raw, wanted_url)
+        normalized = cls._normalize_channel_dict(raw, wanted_url)
         return cls(**normalized)
+
+    @classmethod
+    def _normalize_channel_dict(
+        cls, raw: dict[str, Any], wanted_url: str
+    ) -> dict[str, str]:
+        """
+        Normalizes either:
+          - YT API dict: {"items": [...], ...}
+          - Manual dict: {"title": ...}
+        into: {"title", "desc", "thumbnail_url", "uploads", "url"}
+        """
+        if raw.get("items"):
+            title = html.escape(raw["items"][0]["snippet"]["title"])
+            desc = html.escape(raw["items"][0]["snippet"]["description"])
+            thumbnail_url = raw["items"][0]["snippet"]["thumbnails"]["high"]["url"]
+
+        else:
+            title = raw.get("title")
+            desc = raw.get("desc") or raw.get("description")
+            thumbnail_url = raw.get("thumbnail_url")
+
+        if not title or desc is None:
+            raise BadChannelException("No items returned, bad channel", "")
+
+        return {
+            "title": title,
+            "desc": desc,
+            "thumbnail_url": thumbnail_url,
+            "url": wanted_url,
+        }
 
 
 @dataclasses.dataclass(frozen=True, eq=True)
@@ -35,61 +65,33 @@ class VideoEntry:
 
     @classmethod
     def construct(cls, raw: dict[str, Any]) -> Self | None:
-        normalized = _normalize_video_entry(raw)
+        normalized = cls._normalize_video_entry(raw)
         if normalized:
             return cls(**normalized)
         return None
 
+    @classmethod
+    def _normalize_video_entry(cls, raw: dict) -> dict[str, str] | None:
+        # todo if this video is a short, don't return it?
+        # currently there is not a good way from the data returned to see if is a short.
+        try:
+            title = html.escape(raw["snippet"]["title"])
+            desc = html.escape(raw["snippet"]["description"])
+            my_id = raw["id"]
+            published_at_dt = datetime.datetime.strptime(
+                raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"
+            )
+            duration = isodate.parse_duration(raw["contentDetails"]["duration"])
 
-def _normalize_channel_dict(raw: dict[str, Any], wanted_url: str) -> dict[str, str]:
-    """
-    Normalizes either:
-      - YT API dict: {"items": [...], ...}
-      - Manual dict: {"title": ...}
-    into: {"title", "desc", "thumbnail_url", "uploads", "url"}
-    """
-    if raw.get("items"):
-        title = html.escape(raw["items"][0]["snippet"]["title"])
-        desc = html.escape(raw["items"][0]["snippet"]["description"])
-        thumbnail_url = raw["items"][0]["snippet"]["thumbnails"]["high"]["url"]
-
-    else:
-        title = raw.get("title")
-        desc = raw.get("desc") or raw.get("description")
-        thumbnail_url = raw.get("thumbnail_url")
-
-    if not title or desc is None:
-        raise BadChannelException("No items returned, bad channel", "")
-
-    return {
-        "title": title,
-        "desc": desc,
-        "thumbnail_url": thumbnail_url,
-        "url": wanted_url,
-    }
-
-
-def _normalize_video_entry(raw: dict) -> dict[str, str] | None:
-    # todo if this video is a short, don't return it?
-    # currently there is not a good way from the data returned to see if is a short.
-    try:
-        title = html.escape(raw["snippet"]["title"])
-        desc = html.escape(raw["snippet"]["description"])
-        my_id = raw["id"]
-        published_at_dt = datetime.datetime.strptime(
-            raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"
-        )
-        duration = isodate.parse_duration(raw["contentDetails"]["duration"])
-
-        return {
-            "title": title,
-            "id": my_id,
-            "desc": desc,
-            "published_at": published_at_dt.strftime("%a, %d %b %Y %H:%M:%S +0000"),
-            "duration": duration,
-        }
-    except KeyError:
-        return None
+            return {
+                "title": title,
+                "id": my_id,
+                "desc": desc,
+                "published_at": published_at_dt.strftime("%a, %d %b %Y %H:%M:%S +0000"),
+                "duration": duration,
+            }
+        except KeyError:
+            return None
 
 
 def parse_playlist_info(item: dict) -> dict[str, str]:
