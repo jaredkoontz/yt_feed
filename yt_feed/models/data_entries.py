@@ -52,7 +52,7 @@ class ChannelEntry:
                 uploads = ""
         else:
             title = raw.get("title")
-            desc = raw.get("desc") or raw.get("description") or ''
+            desc = raw.get("desc") or raw.get("description") or ""
             thumbnail_url = raw.get("thumbnail_url")
 
         if not title or desc is None:
