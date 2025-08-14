@@ -49,6 +49,8 @@
     <author>{{ videos_data['channel_data'].title }}</author>
     <itunes:subtitle>{{ video_item.title }}</itunes:subtitle>
     <itunes:summary>{{ video_item.desc }}</itunes:summary>
+    <itunes:image href="{{ video_item.thumbnail }}" />
+
    </item>
   {% endfor %}
  </channel>

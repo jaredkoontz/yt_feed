@@ -14,7 +14,8 @@ class ChannelEntry:
     title: str
     desc: str
     thumbnail_url: str
-    url: str
+    originating_url: str
+    playlist_id: str
 
     @classmethod
     def construct(cls, raw: dict[str, Any], wanted_url) -> Self:
@@ -34,11 +35,21 @@ class ChannelEntry:
           - Manual dict: {"title": ...}
         into: {"title", "desc", "thumbnail_url", "uploads", "url"}
         """
+        # uploads can be optional. If we are looking at a channel or user, we will just
+        # treat their entire upload as the playlist.
+
+        uploads = ""
+
         if raw.get("items"):
             title = html.escape(raw["items"][0]["snippet"]["title"])
             desc = html.escape(raw["items"][0]["snippet"]["description"])
             thumbnail_url = raw["items"][0]["snippet"]["thumbnails"]["high"]["url"]
-
+            try:
+                uploads = raw["items"][0]["contentDetails"]["relatedPlaylists"][
+                    "uploads"
+                ]
+            except KeyError:
+                uploads = ""
         else:
             title = raw.get("title")
             desc = raw.get("desc") or raw.get("description")
@@ -51,7 +62,8 @@ class ChannelEntry:
             "title": title,
             "desc": desc,
             "thumbnail_url": thumbnail_url,
-            "url": wanted_url,
+            "originating_url": wanted_url,
+            "playlist_id": uploads or "",
         }
 
 
@@ -62,6 +74,7 @@ class VideoEntry:
     desc: str
     published_at: str
     duration: str
+    thumbnail: str
 
     @classmethod
     def construct(cls, raw: dict[str, Any]) -> Self | None:
@@ -72,7 +85,6 @@ class VideoEntry:
 
     @classmethod
     def _normalize_video_entry(cls, raw: dict) -> dict[str, str] | None:
-        # todo if this video is a short, don't return it?
         # currently there is not a good way from the data returned to see if is a short.
         try:
             title = html.escape(raw["snippet"]["title"])
@@ -81,14 +93,16 @@ class VideoEntry:
             published_at_dt = datetime.datetime.strptime(
                 raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"
             )
+            # todo could use this duration and filter if it is a short video?
             duration = isodate.parse_duration(raw["contentDetails"]["duration"])
-
+            thumbnail = raw["snippet"]["thumbnails"]["high"]["url"]
             return {
                 "title": title,
                 "id": my_id,
                 "desc": desc,
                 "published_at": published_at_dt.strftime("%a, %d %b %Y %H:%M:%S +0000"),
                 "duration": duration,
+                "thumbnail": thumbnail,
             }
         except KeyError:
             return None

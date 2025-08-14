@@ -29,7 +29,7 @@ def _create_rss_from_channel(yt_user: str, request_type: bool, channel_url: str)
             503,
         )
     try:
-        playlist_data = yt_playlist_items(channel_data.uploads)
+        playlist_data = yt_playlist_items(channel_data.playlist_id)
     except (ssl.SSLError, AttributeError):
         return make_response(
             "Try again",
