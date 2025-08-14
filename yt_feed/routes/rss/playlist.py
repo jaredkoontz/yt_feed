@@ -6,6 +6,7 @@ from googleapiclient.errors import HttpError
 from yt_feed.models.data_entries import ChannelEntry
 from yt_feed.models.data_entries import parse_playlist_info
 from yt_feed.utils.channel_cache import flask_cache
+from yt_feed.utils.channel_cache import only_200
 from yt_feed.utils.render_feed import render_rss_feed
 from yt_feed.utils.yt_api_wrapper import yt_playlist_info
 from yt_feed.utils.yt_api_wrapper import yt_playlist_items
@@ -14,7 +15,7 @@ playlist_page = Blueprint("playlist_page", __name__)
 
 
 @playlist_page.route("/p/<playlist_id>")
-@flask_cache.cached()
+@flask_cache.cached(response_filter=only_200)
 def playlist(playlist_id: str) -> Response | str:
     try:
         playlist_info = yt_playlist_info(playlist_id)
