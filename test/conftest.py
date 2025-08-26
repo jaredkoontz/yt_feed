@@ -7,13 +7,8 @@ from test.data.playlist_contents_data import playlist_contents_data
 from test.data.playlist_info_data import playlist_info_data
 from test.data.video_data import video_data
 
-
-# ... existing code ...
-
-
 @pytest.fixture
 def mock_yt_api(monkeypatch: pytest.MonkeyPatch):
-    # list().execute() wrapper for dict responses
     class _FakeListReq:
         def __init__(self, response: dict):
             self._response = response
@@ -21,19 +16,15 @@ def mock_yt_api(monkeypatch: pytest.MonkeyPatch):
         def execute(self):
             return self._response
 
-    # channels().list(...).execute() -> CHANNEL_RESPONSE (YT-style dict)
     class _FakeChannels:
         def list(self, **kwargs):
             return _FakeListReq(channel_data.channel)
 
-    # Generic collection for playlistItems/playlists/videos
-    # list(...).execute() -> {"items": <your list>}
     class _FakeCollection:
         def __init__(self, items: list[dict]):
             self._items = items
 
         def list(self, **kwargs):
-            # No paging; return all at once
             return _FakeListReq({"items": self._items})
 
     class _FakeYouTube:
