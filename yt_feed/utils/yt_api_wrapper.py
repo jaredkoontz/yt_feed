@@ -61,8 +61,9 @@ def yt_playlist_info(playlist_id: str) -> list[dict]:
     return _get_all_items(_youtube().playlists, opts)
 
 
-def yt_videos(video_ids: tuple[str, ...]) -> list[VideoEntry]:
-    # todo do i need to be calling this in render rss feed? we might already have all the video ids that we want..
+def yt_videos_info(video_ids: tuple[str, ...]) -> list[VideoEntry]:
+    # this call is required to get the duration of a video. All info we care about is in the playlist response
+    # for each video, but we cannot get the duration of a video from the playlist route, only the videos route.
     all_videos = _get_all_items(
         _youtube().videos,
         {"id": ",".join(video_ids), "part": _ALL_DETAILS},

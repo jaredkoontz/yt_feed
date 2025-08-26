@@ -3,17 +3,18 @@ from email.utils import format_datetime
 
 from flask import make_response
 from flask import render_template
+from flask import Response
 
 from yt_feed.models.data_entries import ChannelEntry
 from yt_feed.utils.batch_helper import batch_iter
 from yt_feed.utils.env_vars import domain
-from yt_feed.utils.yt_api_wrapper import yt_videos
+from yt_feed.utils.yt_api_wrapper import yt_videos_info
 
 
-def render_rss_feed(playlist_data: list[dict], channel_data: ChannelEntry):
+def render_rss_feed(playlist_data: list[dict], channel_data: ChannelEntry) -> Response:
     videos_data = []
     for yt_id_batch in batch_iter(playlist_data):
-        videos_data.extend(yt_videos(yt_id_batch))
+        videos_data.extend(yt_videos_info(yt_id_batch))
 
     all_data = {
         "video_info": videos_data,

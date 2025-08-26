@@ -7,7 +7,7 @@
   <description>{{ videos_data['channel_data'].desc }}</description>
   <language>en-us</language>
   <generator>yt_feed</generator>
-  <itunes:category text="yt_feed" />
+  <itunes:category text="yt_feed"/>
   <docs>http://blogs.law.harvard.edu/tech/rss</docs>
   <pubDate>{{ now }}</pubDate>
   <lastBuildDate>{{ now }}</lastBuildDate>
@@ -43,7 +43,7 @@
       type="audio/m4a"
       {# TODO missing length here #}
     />
-    <itunes:image href="{{ video_item.thumbnail }}" />
+    <itunes:image href="{{ video_item.thumbnail }}"/>
     <description>{{ video_item.desc }}</description>
     <guid>https://www.youtube.com/watch?v={{ video_item.id }}</guid>
     <pubDate>{{ video_item.published_at }}</pubDate>
