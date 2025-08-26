@@ -29,3 +29,10 @@ build-backend = "hatchling.build"
 [tool.uv.build-backend]
 module-name = "yt_feed"
 module-root = ""
+
+[tool.pytest.ini_options]
+addopts = [
+  "--cov=yt_feed",
+  "--cov-report=term-missing",
+]
+testpaths = ["test"]

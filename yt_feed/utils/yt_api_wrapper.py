@@ -51,7 +51,7 @@ def yt_channels(username_or_id: str, is_id: bool, channel_url: str) -> ChannelEn
     return ChannelEntry.construct(request.execute(), channel_url)
 
 
-def yt_playlist_items(playlist_id: str) -> list[dict]:
+def yt_videos_in_playlist(playlist_id: str) -> list[dict]:
     opts = {"playlistId": playlist_id, "part": _ALL_DETAILS}
     return _get_all_items(_youtube().playlistItems, opts)
 
@@ -62,6 +62,7 @@ def yt_playlist_info(playlist_id: str) -> list[dict]:
 
 
 def yt_videos(video_ids: tuple[str, ...]) -> list[VideoEntry]:
+    # todo do i need to be calling this in render rss feed? we might already have all the video ids that we want..
     all_videos = _get_all_items(
         _youtube().videos,
         {"id": ",".join(video_ids), "part": _ALL_DETAILS},
