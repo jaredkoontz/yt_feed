@@ -7,6 +7,7 @@ from test.data.playlist_contents_data import playlist_contents_data
 from test.data.playlist_info_data import playlist_info_data
 from test.data.video_data import video_data
 
+
 @pytest.fixture
 def mock_yt_api(monkeypatch: pytest.MonkeyPatch):
     class _FakeListReq:
