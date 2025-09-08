@@ -118,5 +118,3 @@ def parse_playlist_info(item: dict) -> dict[str, str]:
 
 def parse_video_id(item: dict) -> str:
     return item["snippet"]["resourceId"]["videoId"]
-
-
