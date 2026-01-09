@@ -7,6 +7,7 @@ from typing import Self
 import isodate
 
 from yt_feed.models.errors import BadChannelException
+from yt_feed.models.errors import DurationException
 
 
 @dataclasses.dataclass(frozen=True, eq=True)
@@ -85,7 +86,9 @@ class VideoEntry:
 
     @classmethod
     def _normalize_video_entry(cls, raw: dict) -> dict[str, str] | None:
-        # currently there is not a good way from the data returned to see if is a short.
+        # currently there is not a good way from the data returned to see if is a short or a live stream. Live streams
+        # have a duration of "0:00", so we can use that to just ignore live data.
+        # do these show up on stream tabs? how can i get these later? do i want to?
         try:
             title = html.escape(raw["snippet"]["title"])
             desc = html.escape(raw["snippet"]["description"])
@@ -93,9 +96,12 @@ class VideoEntry:
             published_at_dt = datetime.datetime.strptime(
                 raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"
             )
-            # todo could use this duration and filter if it is a short video?
             duration = isodate.parse_duration(raw["contentDetails"]["duration"])
             thumbnail = raw["snippet"]["thumbnails"]["high"]["url"]
+
+            if duration < datetime.timedelta(seconds=10):
+                raise DurationException("Video duration is too short", "")
+
             return {
                 "title": title,
                 "id": my_id,
@@ -104,7 +110,7 @@ class VideoEntry:
                 "duration": duration,
                 "thumbnail": thumbnail,
             }
-        except KeyError:
+        except (KeyError, DurationException):
             return None
 
 
