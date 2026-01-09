@@ -15,3 +15,9 @@ class InvalidConfigException(Exception):
 
         super().__init__(message)
         self.errors = ""
+
+
+class DurationException(Exception):
+    def __init__(self, message, errors):
+        super().__init__(message)
+        self.errors = errors
