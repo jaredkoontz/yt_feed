@@ -41,6 +41,9 @@ COPY --from=builder --chown=app:app /app /app
 # get our dependencies for ytp-dl
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates ffmpeg
 
+# ytp-dl also requires a js runtime
+RUN curl -fsSL https://deno.land/install.sh | sh
+
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
 
