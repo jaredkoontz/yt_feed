@@ -42,11 +42,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       curl \
       ca-certificates \
       ffmpeg \
-      unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # ytp-dl also requires a js runtime
-RUN curl -fsSL https://deno.land/install.sh | sh
+COPY --from=denoland/deno:bin-2.6.7 /deno /usr/local/bin/deno
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
