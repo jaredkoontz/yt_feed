@@ -14,7 +14,6 @@ RUN uv python install 3.13
 
 WORKDIR /app
 
-
 COPY yt_feed /app/yt_feed
 # the uv examples mount these (left in for now), but we are going to just manually copy them in
 COPY uv.lock /app
@@ -39,7 +38,12 @@ COPY --from=builder --chown=python:python /python /python
 COPY --from=builder --chown=app:app /app /app
 
 # get our dependencies for ytp-dl
-RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates ffmpeg
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      curl \
+      ca-certificates \
+      ffmpeg \
+      unzip \
+    && rm -rf /var/lib/apt/lists/*
 
 # ytp-dl also requires a js runtime
 RUN curl -fsSL https://deno.land/install.sh | sh
