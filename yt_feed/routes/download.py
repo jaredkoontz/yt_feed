@@ -1,3 +1,5 @@
+from filelock import FileLock
+from filelock import Timeout
 from flask import Blueprint
 from flask import make_response
 from flask import redirect
@@ -6,13 +8,18 @@ from yt_dlp.utils import DownloadError
 
 from yt_feed.utils.ytdlp_inter import extract_audio
 
+
 download_route = Blueprint("download_page", __name__)
+download_lock = FileLock("/tmp/download_route.lock")
 
 
 @download_route.route("/dl/<video_id>.<suffix>")
 def yt_dl(video_id: str, suffix: str) -> Response:
     try:
-        result = extract_audio(video_id)
+        # getting the url is memory expensive. we should try to limit the number of
+        # processes that are downloading at once
+        with download_lock.acquire(timeout=10):
+            result = extract_audio(video_id)
     except DownloadError as e:
         # unfortunately, yt_dlp does not provide a way to get the error type. It is just a generic DownloadError
         # so we have to do string parsing.
@@ -24,5 +31,8 @@ def yt_dl(video_id: str, suffix: str) -> Response:
             )
         else:
             return make_response(f"Error downloading video: {err_msg}", 500)
+
+    except Timeout:
+        return make_response("Busy, retry shortly", 429)
 
     return redirect(result["url"])
