@@ -10,11 +10,13 @@ set -x
 
 docker pull ghcr.io/jaredkoontz/yt_feed:main
 
-docker stop $(docker ps -a -q)
+docker stop "$(docker ps -a -q)"
 
 docker run\
  -e YOUTUBE_API_KEY="$YT_KEY"\
  -e DOMAIN="$DOM"\
  -p 80:80\
  --rm -d\
+ --memory=512m\
+ --memory-swap=512m\
  ghcr.io/jaredkoontz/yt_feed:main
