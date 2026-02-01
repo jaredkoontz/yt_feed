@@ -72,10 +72,10 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
         <ul>
             <li>
                 <code><a
-                        href="https://www.youtube.com/watch?v=8kKwfZpbIv8">https://www.youtube.com/watch?v=8kKwfZpbIv8</a></code>
+                        href="https://www.youtube.com/watch?v=5LyUgE4XPuU">https://www.youtube.com/watch?v=5LyUgE4XPuU</a></code>
                 <ol>
                     <li>
-                        <code><a href="http://localhost:5446/dl/8kKwfZpbIv8.m4a">http://localhost:5446/dl/8kKwfZpbIv8.m4a</a></code>
+                        <code><a href="http://localhost:5446/dl/5LyUgE4XPuU.m4a">http://localhost:5446/dl/5LyUgE4XPuU.m4a</a></code>
                     </li>
                 </ol>
             </li>
