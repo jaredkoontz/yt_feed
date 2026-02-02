@@ -30,6 +30,8 @@ def create_rss_from_playlist(playlist_id: str):
         playlist_info = yt_playlist_info(playlist_id)
     except HttpError as e:
         return make_response(f"Invalid playlist id {playlist_id}\n{e}", 400)
+    if not playlist_info:
+        return make_response(f"Invalid playlist id {playlist_id}", 400)
 
     channel_data = ChannelEntry.construct(
         parse_playlist_info(playlist_info[0]),
