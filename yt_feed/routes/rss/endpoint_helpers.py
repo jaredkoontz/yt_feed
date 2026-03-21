@@ -1,6 +1,7 @@
 import ssl
 
-from flask import make_response, escape
+from flask import escape
+from flask import make_response
 from googleapiclient.errors import HttpError
 
 from yt_feed.models.data_entries import ChannelEntry
@@ -28,7 +29,7 @@ def _validate_and_render(channel_data, playlist_id):
 def create_rss_from_playlist(playlist_id: str):
     try:
         playlist_info = yt_playlist_info(playlist_id)
-    except HttpError as e:
+    except HttpError:
         return make_response(f"Invalid playlist id {escape(playlist_id)}", 400)
     if not playlist_info:
         return make_response(f"Invalid playlist id {escape(playlist_id)}", 400)
