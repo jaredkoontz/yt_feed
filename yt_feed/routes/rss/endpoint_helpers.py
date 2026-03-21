@@ -1,6 +1,6 @@
 import ssl
 
-from flask import make_response
+from flask import make_response, escape
 from googleapiclient.errors import HttpError
 
 from yt_feed.models.data_entries import ChannelEntry
@@ -21,7 +21,7 @@ def _validate_and_render(channel_data, playlist_id):
             503,
         )
     if len(playlist_data) == 0:
-        return make_response(f"Empty playlist {playlist_id}", 400)
+        return make_response(f"Empty playlist {escape(playlist_id)}", 400)
     return render_rss_feed(playlist_data, channel_data)
 
 
@@ -29,9 +29,9 @@ def create_rss_from_playlist(playlist_id: str):
     try:
         playlist_info = yt_playlist_info(playlist_id)
     except HttpError as e:
-        return make_response(f"Invalid playlist id {playlist_id}\n{e}", 400)
+        return make_response(f"Invalid playlist id {escape(playlist_id)}", 400)
     if not playlist_info:
-        return make_response(f"Invalid playlist id {playlist_id}", 400)
+        return make_response(f"Invalid playlist id {escape(playlist_id)}", 400)
 
     channel_data = ChannelEntry.construct(
         parse_playlist_info(playlist_info[0]),
@@ -52,7 +52,7 @@ def create_rss_from_channel(yt_user: str, request_type: bool, channel_url: str):
     except (IndexError, BadChannelException):
         correct_path_choice = "user" if request_type else "channel"
         return make_response(
-            f"It appears that {yt_user} is not a valid {correct_path_choice}.",
+            f"It appears that {escape(yt_user)} is not a valid {correct_path_choice}.",
             404,
         )
     except ssl.SSLError:
