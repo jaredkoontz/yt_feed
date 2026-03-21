@@ -1,8 +1,8 @@
 import ssl
 
-from flask import escape
 from flask import make_response
 from googleapiclient.errors import HttpError
+from markupsafe import escape
 
 from yt_feed.models.data_entries import ChannelEntry
 from yt_feed.models.data_entries import parse_playlist_info
