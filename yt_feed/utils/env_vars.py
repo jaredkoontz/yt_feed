@@ -32,9 +32,11 @@ _ref = _EnvVarHelper()
 
 def domain() -> str:
     assert _ref is not None
-    assert type(_ref.domain) is str
+    assert type(_ref.domain) is str and _ref.domain is not None
     return _ref.domain
 
 
 def youtube_api_key() -> str:
+    assert _ref is not None
+    assert type(_ref.yt_api_key) is str and _ref.yt_api_key is not None
     return _ref.yt_api_key
