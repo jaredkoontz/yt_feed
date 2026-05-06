@@ -1,9 +1,14 @@
+import os
+
 import pytest
 
 from test.data import channel_data
 from test.data.playlist_contents_data import playlist_contents_data
 from test.data.playlist_info_data import playlist_info_data
 from test.data.video_data import video_data
+
+os.environ.setdefault("DOMAIN", "http://0.0.0.0")
+os.environ.setdefault("YOUTUBE_API_KEY", "deadbeef")
 
 
 @pytest.fixture
