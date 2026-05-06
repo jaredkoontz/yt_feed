@@ -1,5 +1,3 @@
-import os
-
 import pytest
 
 from test.data import channel_data
