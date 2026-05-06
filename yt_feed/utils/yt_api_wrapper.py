@@ -1,6 +1,8 @@
+from contextlib import contextmanager
 from typing import Callable
+from typing import Iterator
 
-from googleapiclient.discovery import build
+from googleapiclient.discovery import build, Resource
 
 from yt_feed.models.data_entries import ChannelEntry
 from yt_feed.models.data_entries import VideoEntry
@@ -13,6 +15,21 @@ _ALL_DETAILS = ",".join([_SNIPPET, "contentDetails"])
 
 def _youtube():
     return build("youtube", "v3", developerKey=env_vars.youtube_api_key())
+
+
+def _close_youtube(youtube: Resource) -> None:
+    close = getattr(youtube, "close", None)
+    if callable(close):
+        close()
+
+
+@contextmanager
+def youtube_service() -> Iterator[Resource]:
+    youtube = _youtube()
+    try:
+        yield youtube
+    finally:
+        _close_youtube(youtube)
 
 
 def _get_all_items(func: Callable, opts: dict[str, str]) -> list[dict]:
@@ -41,31 +58,33 @@ def _get_all_items(func: Callable, opts: dict[str, str]) -> list[dict]:
     return data
 
 
-def yt_channels(username_or_id: str, is_id: bool, channel_url: str) -> ChannelEntry:
+def yt_channels(
+    youtube: Resource, username_or_id: str, is_id: bool, channel_url: str
+) -> ChannelEntry:
     opts = {"id": username_or_id} if is_id else {"forHandle": username_or_id}
 
     # we are not paginating here
-    request = (
-        _youtube().channels().list(**opts, part=_ALL_DETAILS, maxResults=_RESULT_SIZE)
+    request = youtube.channels().list(
+        **opts, part=_ALL_DETAILS, maxResults=_RESULT_SIZE
     )
     return ChannelEntry.construct(request.execute(), channel_url)
 
 
-def yt_videos_in_playlist(playlist_id: str) -> list[dict]:
+def yt_videos_in_playlist(youtube: Resource, playlist_id: str) -> list[dict]:
     opts = {"playlistId": playlist_id, "part": _ALL_DETAILS}
-    return _get_all_items(_youtube().playlistItems, opts)
+    return _get_all_items(youtube.playlistItems, opts)
 
 
-def yt_playlist_info(playlist_id: str) -> list[dict]:
+def yt_playlist_info(youtube: Resource, playlist_id: str) -> list[dict]:
     opts = {"id": playlist_id, "part": _SNIPPET}
-    return _get_all_items(_youtube().playlists, opts)
+    return _get_all_items(youtube.playlists, opts)
 
 
-def yt_videos_info(video_ids: tuple[str, ...]) -> list[VideoEntry]:
+def yt_videos_info(youtube: Resource, video_ids: tuple[str, ...]) -> list[VideoEntry]:
     # this call is required to get the duration of a video. All info we care about is in the playlist response
     # for each video, but we cannot get the duration of a video from the playlist route, only the videos route.
     all_videos = _get_all_items(
-        _youtube().videos,
+        youtube.videos,
         {"id": ",".join(video_ids), "part": _ALL_DETAILS},
     )
     return [entry for x in all_videos if (entry := VideoEntry.construct(x)) is not None]
