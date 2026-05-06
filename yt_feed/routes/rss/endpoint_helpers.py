@@ -1,6 +1,7 @@
 import ssl
 
 from flask import make_response
+from googleapiclient.discovery import Resource
 from googleapiclient.errors import HttpError
 from markupsafe import escape
 
@@ -8,13 +9,13 @@ from yt_feed.models.data_entries import ChannelEntry
 from yt_feed.models.data_entries import parse_playlist_info
 from yt_feed.models.errors import BadChannelException
 from yt_feed.utils.render_feed import render_rss_feed
+from yt_feed.utils.yt_api_wrapper import youtube_service
 from yt_feed.utils.yt_api_wrapper import yt_channels
 from yt_feed.utils.yt_api_wrapper import yt_playlist_info
-from yt_feed.utils.yt_api_wrapper import youtube_service
 from yt_feed.utils.yt_api_wrapper import yt_videos_in_playlist
 
 
-def _validate_and_render(youtube, channel_data, playlist_id):
+def _validate_and_render(youtube: Resource, channel_data, playlist_id):
     try:
         playlist_data = yt_videos_in_playlist(youtube, playlist_id)
     except (ssl.SSLError, AttributeError):

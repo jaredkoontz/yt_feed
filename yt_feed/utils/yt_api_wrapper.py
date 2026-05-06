@@ -2,7 +2,8 @@ from contextlib import contextmanager
 from typing import Callable
 from typing import Iterator
 
-from googleapiclient.discovery import build, Resource
+from googleapiclient.discovery import build
+from googleapiclient.discovery import Resource
 
 from yt_feed.models.data_entries import ChannelEntry
 from yt_feed.models.data_entries import VideoEntry
