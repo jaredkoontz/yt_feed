@@ -7,6 +7,9 @@ from test.data.playlist_contents_data import playlist_contents_data
 from test.data.playlist_info_data import playlist_info_data
 from test.data.video_data import video_data
 
+os.environ.setdefault("DOMAIN", "http://0.0.0.0")
+os.environ.setdefault("YOUTUBE_API_KEY", "deadbeef")
+
 
 @pytest.fixture
 def mock_yt_api(monkeypatch: pytest.MonkeyPatch):
@@ -60,12 +63,6 @@ def mock_yt_api(monkeypatch: pytest.MonkeyPatch):
 
 @pytest.fixture()
 def app(monkeypatch):
-    envs = {
-        "DOMAIN": "http://0.0.0.0",
-        "YOUTUBE_API_KEY": "deadbeef",
-    }
-    monkeypatch.setattr(os, "environ", envs)
-
     from yt_feed.web_app import yt_feed_app
 
     app = yt_feed_app
