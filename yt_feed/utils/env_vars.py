@@ -27,16 +27,23 @@ class _EnvVarHelper:
         return self.__yt_api
 
 
-_ref = _EnvVarHelper()
+_ref: _EnvVarHelper | None = None
+
+
+def _env() -> _EnvVarHelper:
+    global _ref
+    if _ref is None:
+        _ref = _EnvVarHelper()
+    return _ref
 
 
 def domain() -> str:
-    assert _ref is not None
-    assert type(_ref.domain) is str and _ref.domain is not None
-    return _ref.domain
+    value = _env().domain
+    assert type(value) is str and value is not None
+    return value
 
 
 def youtube_api_key() -> str:
-    assert _ref is not None
-    assert type(_ref.yt_api_key) is str and _ref.yt_api_key is not None
-    return _ref.yt_api_key
+    value = _env().yt_api_key
+    assert type(value) is str and value is not None
+    return value
