@@ -1,6 +1,3 @@
-import os
-from unittest import mock
-
 import pytest
 
 from yt_feed.utils import yt_api_wrapper
@@ -46,21 +43,7 @@ def _patch_youtube(monkeypatch: pytest.MonkeyPatch, service: _FakeYouTube) -> No
     monkeypatch.setattr(yt_api_wrapper, "_youtube", lambda: service)
 
 
-@pytest.fixture()
-def set_config(monkeypatch):
-    with mock.patch.dict(os.environ, clear=True):
-        envvars = {
-            "DOMAIN ": "localhost",
-            "YOUTUBE_API_KEY": "deadbeef",
-        }
-        for k, v in envvars.items():
-            monkeypatch.setenv(k, v)
-        yield
-
-
-def test_yt_channels_closes_youtube_service(
-    set_config, monkeypatch: pytest.MonkeyPatch
-):
+def test_yt_channels_closes_youtube_service(monkeypatch: pytest.MonkeyPatch):
     service = _FakeYouTube(
         {
             "items": [
@@ -87,9 +70,7 @@ def test_yt_channels_closes_youtube_service(
     assert service.closed is True
 
 
-def test_paginated_calls_close_youtube_service(
-    set_config, monkeypatch: pytest.MonkeyPatch
-):
+def test_paginated_calls_close_youtube_service(monkeypatch: pytest.MonkeyPatch):
     service = _FakeYouTube({"items": [{"id": "PL123"}]})
     _patch_youtube(monkeypatch, service)
 
@@ -100,9 +81,7 @@ def test_paginated_calls_close_youtube_service(
     assert service.closed is True
 
 
-def test_youtube_service_closes_when_execute_raises(
-    set_config, monkeypatch: pytest.MonkeyPatch
-):
+def test_youtube_service_closes_when_execute_raises(monkeypatch: pytest.MonkeyPatch):
     service = _FakeYouTube(error=RuntimeError("api failed"))
     _patch_youtube(monkeypatch, service)
 
