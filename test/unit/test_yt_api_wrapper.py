@@ -67,7 +67,7 @@ def test_yt_channels_closes_youtube_service(monkeypatch: pytest.MonkeyPatch):
         assert service.closed is False
 
     assert channel.title == "Test Channel"
-    assert service.closed is True
+    assert service.closed
 
 
 def test_paginated_calls_close_youtube_service(monkeypatch: pytest.MonkeyPatch):
@@ -76,9 +76,9 @@ def test_paginated_calls_close_youtube_service(monkeypatch: pytest.MonkeyPatch):
 
     with yt_api_wrapper.youtube_service() as youtube:
         assert yt_api_wrapper.yt_playlist_info(youtube, "PL123") == [{"id": "PL123"}]
-        assert service.closed is False
+        assert not service.closed
 
-    assert service.closed is True
+    assert service.closed
 
 
 def test_youtube_service_closes_when_execute_raises(monkeypatch: pytest.MonkeyPatch):
