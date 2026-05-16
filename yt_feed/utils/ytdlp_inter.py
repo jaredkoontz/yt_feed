@@ -1,6 +1,6 @@
 from typing import Any
-from typing import TypeAlias
 from typing import cast
+from typing import TypeAlias
 
 import yt_dlp
 

@@ -104,9 +104,7 @@ class VideoEntry:
         return None
 
     @classmethod
-    def _normalize_video_entry(
-        cls, raw: dict[str, Any]
-    ) -> NormalizedVideoEntry | None:
+    def _normalize_video_entry(cls, raw: dict[str, Any]) -> NormalizedVideoEntry | None:
         # currently there is not a good way from the data returned to see if is a short or a live stream. Live streams
         # have a duration of "0:00", so we can use that to just ignore live data.
         # do these show up on stream tabs? how can i get these later? do i want to?
