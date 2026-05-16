@@ -23,6 +23,7 @@ dev = [
     "pytest>=8.3.5",
     "pytest-cov>=6.0.0",
     "pyrefly>=1.0.0",
+    "types-yt-dlp>=2026.3.17.20260510"
 ]
 
 [build-system]
@@ -39,3 +40,9 @@ addopts = [
     "--cov-report=term-missing",
 ]
 testpaths = ["test"]
+
+[tool.pyrefly]
+project-includes = [
+    "**/*.py*",
+    "**/*.ipynb",
+]

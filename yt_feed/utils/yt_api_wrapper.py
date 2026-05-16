@@ -1,6 +1,6 @@
 from contextlib import contextmanager
 from typing import Callable
-from typing import Iterator
+from typing import Generator
 
 from googleapiclient.discovery import build
 from googleapiclient.discovery import Resource
@@ -25,7 +25,7 @@ def _close_youtube(youtube: Resource) -> None:
 
 
 @contextmanager
-def youtube_service() -> Iterator[Resource]:
+def youtube_service() -> Generator[Resource]:
     youtube = _youtube()
     try:
         yield youtube

@@ -959,6 +959,18 @@ wheels = [
 ]
 
 [[package]]
+name = "types-yt-dlp"
+version = "2026.3.17.20260510"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "websockets" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b8/63/e9066031856139e8896fc35fa022d434935929cfd52642be7ab77a575c09/types_yt_dlp-2026.3.17.20260510.tar.gz", hash = "sha256:9d9e7c7043369409da361cb117b92972f24bbf57de26fa99328546d73a942db1", size = 43631, upload-time = "2026-05-10T05:26:39.746Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cc/42/6387ec5627c1ed8ef08f2f526fbca7a19fc72e827e7094eeff064108af1d/types_yt_dlp-2026.3.17.20260510-py3-none-any.whl", hash = "sha256:612f34eb822dc567ef6086340d12e7bd4cf272bfb8a3423395d9eec900950b83", size = 58182, upload-time = "2026-05-10T05:26:38.546Z" },
+]
+
+[[package]]
 name = "uritemplate"
 version = "4.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1102,6 +1114,7 @@ dev = [
     { name = "pyrefly" },
     { name = "pytest" },
     { name = "pytest-cov" },
+    { name = "types-yt-dlp" },
 ]
 
 [package.metadata]
@@ -1124,4 +1137,5 @@ dev = [
     { name = "pyrefly", specifier = ">=1.0.0" },
     { name = "pytest", specifier = ">=8.3.5" },
     { name = "pytest-cov", specifier = ">=6.0.0" },
+    { name = "types-yt-dlp", specifier = ">=2026.3.17.20260510" },
 ]
