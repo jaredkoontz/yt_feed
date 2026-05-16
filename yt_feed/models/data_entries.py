@@ -2,12 +2,22 @@ import dataclasses
 import datetime
 import html
 from typing import Any
+from typing import cast
 from typing import Self
+from typing import TypedDict
 
 import isodate
 
 from yt_feed.models.errors import BadChannelException
 from yt_feed.models.errors import DurationException
+
+
+class NormalizedChannelEntry(TypedDict):
+    title: str
+    desc: str
+    thumbnail_url: str
+    originating_url: str
+    playlist_id: str
 
 
 @dataclasses.dataclass(frozen=True, eq=True)
@@ -19,7 +29,7 @@ class ChannelEntry:
     playlist_id: str
 
     @classmethod
-    def construct(cls, raw: dict[str, Any], wanted_url) -> Self:
+    def construct(cls, raw: dict[str, Any], wanted_url: str) -> Self:
         """
         Accepts either a YT API response dict or a hand-made dict and constructs ChannelEntry.
         """
@@ -29,7 +39,7 @@ class ChannelEntry:
     @classmethod
     def _normalize_channel_dict(
         cls, raw: dict[str, Any], wanted_url: str
-    ) -> dict[str, str]:
+    ) -> NormalizedChannelEntry:
         """
         Normalizes either:
           - YT API dict: {"items": [...], ...}
@@ -56,16 +66,25 @@ class ChannelEntry:
             desc = raw.get("desc") or raw.get("description") or ""
             thumbnail_url = raw.get("thumbnail_url")
 
-        if not title or desc is None:
+        if not title or desc is None or not thumbnail_url:
             raise BadChannelException("No items returned, bad channel", "")
 
         return {
-            "title": title,
-            "desc": desc,
-            "thumbnail_url": thumbnail_url,
+            "title": str(title),
+            "desc": str(desc),
+            "thumbnail_url": str(thumbnail_url),
             "originating_url": wanted_url,
             "playlist_id": uploads or "",
         }
+
+
+class NormalizedVideoEntry(TypedDict):
+    title: str
+    id: str
+    desc: str
+    published_at: str
+    duration: datetime.timedelta
+    thumbnail: str
 
 
 @dataclasses.dataclass(frozen=True, eq=True)
@@ -74,7 +93,7 @@ class VideoEntry:
     id: str
     desc: str
     published_at: str
-    duration: str
+    duration: datetime.timedelta
     thumbnail: str
 
     @classmethod
@@ -85,7 +104,7 @@ class VideoEntry:
         return None
 
     @classmethod
-    def _normalize_video_entry(cls, raw: dict) -> dict[str, str] | None:
+    def _normalize_video_entry(cls, raw: dict[str, Any]) -> NormalizedVideoEntry | None:
         # currently there is not a good way from the data returned to see if is a short or a live stream. Live streams
         # have a duration of "0:00", so we can use that to just ignore live data.
         # do these show up on stream tabs? how can i get these later? do i want to?
@@ -96,10 +115,13 @@ class VideoEntry:
             published_at_dt = datetime.datetime.strptime(
                 raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"
             )
-            duration = isodate.parse_duration(raw["contentDetails"]["duration"])
+            duration = cast(
+                datetime.timedelta,
+                isodate.parse_duration(raw["contentDetails"]["duration"]),
+            )
             thumbnail = raw["snippet"]["thumbnails"]["high"]["url"]
 
-            if duration < datetime.timedelta(seconds=10):
+            if duration.seconds < datetime.timedelta(seconds=10).seconds:
                 raise DurationException("Video duration is too short", "")
 
             return {

@@ -1,6 +1,6 @@
 from contextlib import contextmanager
 from typing import Callable
-from typing import Iterator
+from typing import Generator
 
 from googleapiclient.discovery import build
 from googleapiclient.discovery import Resource
@@ -25,7 +25,7 @@ def _close_youtube(youtube: Resource) -> None:
 
 
 @contextmanager
-def youtube_service() -> Iterator[Resource]:
+def youtube_service() -> Generator[Resource]:
     youtube = _youtube()
     try:
         yield youtube
@@ -65,6 +65,7 @@ def yt_channels(
     opts = {"id": username_or_id} if is_id else {"forHandle": username_or_id}
 
     # we are not paginating here
+    # pyrefly: ignore [missing-attribute]
     request = youtube.channels().list(
         **opts, part=_ALL_DETAILS, maxResults=_RESULT_SIZE
     )
@@ -73,11 +74,13 @@ def yt_channels(
 
 def yt_videos_in_playlist(youtube: Resource, playlist_id: str) -> list[dict]:
     opts = {"playlistId": playlist_id, "part": _ALL_DETAILS}
+    # pyrefly: ignore [missing-attribute]
     return _get_all_items(youtube.playlistItems, opts)
 
 
 def yt_playlist_info(youtube: Resource, playlist_id: str) -> list[dict]:
     opts = {"id": playlist_id, "part": _SNIPPET}
+    # pyrefly: ignore [missing-attribute]
     return _get_all_items(youtube.playlists, opts)
 
 
@@ -85,6 +88,7 @@ def yt_videos_info(youtube: Resource, video_ids: tuple[str, ...]) -> list[VideoE
     # this call is required to get the duration of a video. All info we care about is in the playlist response
     # for each video, but we cannot get the duration of a video from the playlist route, only the videos route.
     all_videos = _get_all_items(
+        # pyrefly: ignore [missing-attribute]
         youtube.videos,
         {"id": ",".join(video_ids), "part": _ALL_DETAILS},
     )

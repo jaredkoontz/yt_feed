@@ -1,6 +1,6 @@
 [project]
 name = "yt_feed"
-version = "0.3.0"
+version = "0.4.0"
 description = "Create a working RSS feed (for your podcatcher) to turn a youtube channel into an audio podcast"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -22,11 +22,13 @@ dev = [
     "pre-commit>=4.1.0",
     "pytest>=8.3.5",
     "pytest-cov>=6.0.0",
+    "pyrefly>=1.0.0",
+    "types-yt-dlp>=2026.3.17.20260510"
 ]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.11.3,<0.12"]
+build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-name = "yt_feed"
@@ -38,3 +40,9 @@ addopts = [
     "--cov-report=term-missing",
 ]
 testpaths = ["test"]
+
+[tool.pyrefly]
+project-includes = [
+    "**/*.py*",
+    "**/*.ipynb",
+]
