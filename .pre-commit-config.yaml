@@ -13,7 +13,7 @@ repos:
     rev: v0.12.3
     hooks:
       - id: ruff-check
-        args: [ --fix ]
+        args: [ --fix, --verbose]
       - id: ruff-format
 
   - repo: https://github.com/asottile/reorder_python_imports
