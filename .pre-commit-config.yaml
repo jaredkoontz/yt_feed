@@ -13,8 +13,10 @@ repos:
     rev: v0.12.3
     hooks:
       - id: ruff-check
-        args: [ --fix ]
-      - id: ruff-format
+        args:
+          - --fix
+          - --exit-non-zero-on-fix
+      - id: ruff
 
   - repo: https://github.com/asottile/reorder_python_imports
     rev: v3.13.0
@@ -26,11 +28,11 @@ repos:
     rev: 25.1.0
     hooks:
       - id: black
-#
-#  - repo: https://github.com/facebook/pyrefly-pre-commit
-#    rev: 1.0.0
-#    hooks:
-#      - id: pyrefly-check
-#        name: Pyrefly (type checking)
-#        pass_filenames: false
-#        language: system
+
+  - repo: https://github.com/facebook/pyrefly-pre-commit
+    rev: 1.0.0
+    hooks:
+      - id: pyrefly-check
+        name: Pyrefly (type checking)
+        pass_filenames: false
+        language: system

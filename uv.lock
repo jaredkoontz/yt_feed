@@ -233,14 +233,14 @@ wheels = [
 
 [[package]]
 name = "click"
-version = "8.3.3"
+version = "8.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz", hash = "sha256:398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2", size = 328061, upload-time = "2026-04-22T15:11:27.506Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/23/e4/796662cd90cf80e3a363c99db2b88e0e394b988a575f60a17e16440cd011/click-8.4.0.tar.gz", hash = "sha256:638f1338fe1235c8f4e008e4a8a254fb5c5fbdcbb40ece3c9142ebb78e792973", size = 350843, upload-time = "2026-05-17T00:47:58.425Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ae/44/c1221527f6a71a01ec6fbad7fa78f1d50dfa02217385cf0fa3eec7087d59/click-8.3.3-py3-none-any.whl", hash = "sha256:a2bf429bb3033c89fa4936ffb35d5cb471e3719e1f3c8a7c3fff0b8314305613", size = 110502, upload-time = "2026-04-22T15:11:25.044Z" },
+    { url = "https://files.pythonhosted.org/packages/ee/ae/8e92f8058baf87f6c7d86ee7e457668690195cc77efedb8d3797a06e3940/click-8.4.0-py3-none-any.whl", hash = "sha256:40c50b7c6c6adac2823d411041ec84f3f103f1b280d5e9ce0d7f998995832f81", size = 116147, upload-time = "2026-05-17T00:47:56.842Z" },
 ]
 
 [[package]]
@@ -482,15 +482,15 @@ wheels = [
 
 [[package]]
 name = "google-auth"
-version = "2.52.0"
+version = "2.53.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
     { name = "pyasn1-modules" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d4/f8/80d2493cbedece1c623dc3e3cb1883300871af0dcdae254409522985ac23/google_auth-2.52.0.tar.gz", hash = "sha256:01f30e1a9e3638698d89464f5e603ce29d18e1c0e63ec31ac570aba4e164aaf5", size = 335027, upload-time = "2026-05-07T19:45:24.033Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c6/ad/ff781329bbbdc0974a098d996e89c9e1f7024262f9e3eec442fbb9ad1ac6/google_auth-2.53.0.tar.gz", hash = "sha256:e7e6aa16f6bee7b2b264830fd04f08087a1d5a836df516251a5d15327b246c9c", size = 335844, upload-time = "2026-05-15T20:53:07.928Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ee/fc/2cdc74252746f547f81ff3f02d4d4234a3f411b5de5b61af97e633a060b9/google_auth-2.52.0-py3-none-any.whl", hash = "sha256:aee92803ba0ff93a70a3b8a35c7b4797837751cd6380b63ff38372b98f3ed627", size = 245614, upload-time = "2026-05-07T19:45:21.914Z" },
+    { url = "https://files.pythonhosted.org/packages/4a/c9/db44165ba7c581268c6d46017ef63339110378305062830104fc7fa144cb/google_auth-2.53.0-py3-none-any.whl", hash = "sha256:6e7449917c599b35126a99ec268ec6880301f2fea41dce198fe8fd83ff642b68", size = 246071, upload-time = "2026-05-15T20:53:05.609Z" },
 ]
 
 [[package]]
@@ -960,14 +960,14 @@ wheels = [
 
 [[package]]
 name = "types-yt-dlp"
-version = "2026.3.17.20260510"
+version = "2026.3.17.20260518"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b8/63/e9066031856139e8896fc35fa022d434935929cfd52642be7ab77a575c09/types_yt_dlp-2026.3.17.20260510.tar.gz", hash = "sha256:9d9e7c7043369409da361cb117b92972f24bbf57de26fa99328546d73a942db1", size = 43631, upload-time = "2026-05-10T05:26:39.746Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/35/b1/cf2392c74b8b195cd78e9330bf2bb148c848ae825dca13eeda7fe6cbc32a/types_yt_dlp-2026.3.17.20260518.tar.gz", hash = "sha256:4ad1c2490281aaae30f8382bbd11c84311b2c381aa79de0ad198728083e1c60c", size = 43701, upload-time = "2026-05-18T06:07:20.49Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cc/42/6387ec5627c1ed8ef08f2f526fbca7a19fc72e827e7094eeff064108af1d/types_yt_dlp-2026.3.17.20260510-py3-none-any.whl", hash = "sha256:612f34eb822dc567ef6086340d12e7bd4cf272bfb8a3423395d9eec900950b83", size = 58182, upload-time = "2026-05-10T05:26:38.546Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/17/16e21206439337d4f4fb6d1442f1179afe704d40b4c19c4f852b7fac125f/types_yt_dlp-2026.3.17.20260518-py3-none-any.whl", hash = "sha256:76c0aa878749e063ba1e6b2796186d6c7bd3e6886f1db8bd874223434de39c91", size = 58218, upload-time = "2026-05-18T06:07:19.587Z" },
 ]
 
 [[package]]
