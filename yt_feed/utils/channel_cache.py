@@ -1,5 +1,5 @@
-from flask import Response
 from flask_caching import Cache
+from werkzeug import Response
 
 cache_config = {
     "CACHE_TYPE": "SimpleCache",

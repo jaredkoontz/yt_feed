@@ -26,11 +26,11 @@ repos:
     rev: 25.1.0
     hooks:
       - id: black
-#
-#  - repo: https://github.com/facebook/pyrefly-pre-commit
-#    rev: 1.0.0
-#    hooks:
-#      - id: pyrefly-check
-#        name: Pyrefly (type checking)
-#        pass_filenames: false
-#        language: system
+
+  - repo: https://github.com/facebook/pyrefly-pre-commit
+    rev: 1.0.0
+    hooks:
+      - id: pyrefly-check
+        name: Pyrefly (type checking)
+        pass_filenames: false
+        language: system
