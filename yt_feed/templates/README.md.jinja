@@ -3,7 +3,7 @@
 {# if you move this template, make sure to update tools/update_readme.py#}
 Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a podcast.
 
-[![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
+[![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
 [![Docker](https://github.com/jaredkoontz/yt_feed/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/docker-publish.yml)
 
 ## User Instructions
@@ -14,7 +14,7 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 
 ### Pre-reqs
 
-You'll need a YouTube api key.
+You'll need a YouTube api key. Information on how to get one can be found [here](https://developers.google.com/youtube/v3/getting-started).
 
 ### Docker
 
@@ -46,3 +46,9 @@ Currently running on python:3.12
 Ensure it is running
 
 `curl localhost:5446`
+
+### Deployment
+
+There is a repo that contains an edge server image and a docker compose file that can be used to deploy the app.
+Information on how to use it can be found [here](https://github.com/jaredkoontz/yt_feed_deploy). This is the recommended
+way to deploy the app and how I run it.
