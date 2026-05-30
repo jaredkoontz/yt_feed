@@ -1,5 +1,6 @@
 # yt_feed
 
+
 Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a podcast.
 
 [![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
@@ -69,8 +70,8 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             entire channel or want to mix different videos from different channels.</p>
     </li>
     <li>
-        <p>If you want to download the audio for a single video, you can use the <b>download (dl)</b> routes. Examples:
-        </p>
+        <p>If you want to download the audio for a single video, you can use the <b>download (dl)</b> routes.</p>
+        <h4>Examples:</h4>
         <ul>
             <li>
                 <code><a
