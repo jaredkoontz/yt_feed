@@ -10,20 +10,22 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 
 <ul>
     <li>
-        <p>Works on any playlist or channel, get the id from the url, and create a url using that id on this website.
-            Examples:</p>
+        <p>Works on any accessible playlist or channel, get the id from the url, and create a url using that id on this
+            website.</p>
+        <h4>Examples:</h4>
         <ul>
             Channel (channel handle):
+            <li>
+                <code><a
+                        href="https://www.youtube.com/c/CoryWongMusic">https://www.youtube.com/c/CoryWongMusic</a></code>
+                <ol>
+                    <li><code><a href="http://localhost:5446/c/CoryWongMusic">http://localhost:5446/c/CoryWongMusic</a></code></li>
+                </ol>
+            </li>
             <li>
                 <code><a href="https://youtube.com/c/@AdamNeely">https://youtube.com/c/@AdamNeely</a></code>
                 <ol>
                     <li><code><a href="http://localhost:5446/c/@AdamNeely">http://localhost:5446/c/@AdamNeely</a></code></li>
-                </ol>
-            </li>
-            <li>
-                <code><a href="https://youtube.com/c/beardmeatsfood">https://youtube.com/c/beardmeatsfood</a></code>
-                <ol>
-                    <li><code><a href="http://localhost:5446/c/beardmeatsfood">http://localhost:5446/c/beardmeatsfood</a></code></li>
                 </ol>
             </li>
             Playlist (playlist id):
@@ -52,23 +54,24 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
                     </li>
                 </ol>
             </li>
-            <li><code><a href="https://www.youtube.com/channel/UC7-E5xhZBZdW-8d7V80mzfg">https://www.youtube.com/channel/UC7-E5xhZBZdW-8d7V80mzfg</a></code>
+            <li><code><a href="https://www.youtube.com/channel/UCnLozCO8w7uJODg8_iAGaVw">https://www.youtube.com/channel/UCnLozCO8w7uJODg8_iAGaVw</a></code>
                 <ol>
                     <li>
                         <code><a
-                                href="http://localhost:5446/u/UC7-E5xhZBZdW-8d7V80mzfg">http://localhost:5446/u/UC7-E5xhZBZdW-8d7V80mzfg</a></code>
+                                href="http://localhost:5446/u/UCnLozCO8w7uJODg8_iAGaVw">http://localhost:5446/u/UCnLozCO8w7uJODg8_iAGaVw</a></code>
                     </li>
                 </ol>
             </li>
         </ul>
     </li>
     <li>
-        <p>Add this RSS feed to your podcatcher of choice. I would recommend creating a `podcast` playlist on your
+        <p>Add this RSS feed to your podcatcher of choice. I would recommend creating a podcast playlist on your
             YouTube account and saving wanted videos in that playlist if you do not want to have access to an
-            entire channel.</p>
+            entire channel or want to mix different videos from different channels.</p>
     </li>
     <li>
-        <p>If you want to download the audio for a single video, you can use the `download` routes. Examples:</p>
+        <p>If you want to download the audio for a single video, you can use the <b>download (dl)</b> routes. Examples:
+        </p>
         <ul>
             <li>
                 <code><a
