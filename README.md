@@ -18,49 +18,49 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             <li>
                 <code><a
                         href="https://www.youtube.com/c/CoryWongMusic">https://www.youtube.com/c/CoryWongMusic</a></code>
-                <ol>
+                <ul>
                     <li><code><a href="http://localhost:5446/c/CoryWongMusic">http://localhost:5446/c/CoryWongMusic</a></code></li>
-                </ol>
+                </ul>
             </li>
             <li>
                 <code><a href="https://youtube.com/c/@AdamNeely">https://youtube.com/c/@AdamNeely</a></code>
-                <ol>
+                <ul>
                     <li><code><a href="http://localhost:5446/c/@AdamNeely">http://localhost:5446/c/@AdamNeely</a></code></li>
-                </ol>
+                </ul>
             </li>
             Playlist (playlist id):
             <li>
                 <code><a href="https://www.youtube.com/playlist?list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">https://www.youtube.com/playlist?list=PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
-                <ol>
+                <ul>
                     <li>
                         <code><a href="http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt">http://localhost:5446/p/PLq5Wss5r1Cvtfc3KcM-34zIQE6hQz-DJt</a></code>
                     </li>
-                </ol>
+                </ul>
             </li>
             <li>
                 <code><a href="https://www.youtube.com/playlist?list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">https://www.youtube.com/playlist?list=PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
-                <ol>
+                <ul>
                     <li>
                         <code><a href="http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu">http://localhost:5446/p/PLz4scdcuqnN2oK16dHadxF1JTAaW1snBu</a></code>
                     </li>
-                </ol>
+                </ul>
             </li>
             User (channel id):
             <li><code><a href="https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ">https://www.youtube.com/channel/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
-                <ol>
+                <ul>
                     <li>
                         <code><a
                                 href="http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ">http://localhost:5446/u/UCj1VqrHhDte54oLgPG4xpuQ</a></code>
                     </li>
-                </ol>
+                </ul>
             </li>
             <li><code><a href="https://www.youtube.com/channel/UCnLozCO8w7uJODg8_iAGaVw">https://www.youtube.com/channel/UCnLozCO8w7uJODg8_iAGaVw</a></code>
-                <ol>
+                <ul>
                     <li>
                         <code><a
                                 href="http://localhost:5446/u/UCnLozCO8w7uJODg8_iAGaVw">http://localhost:5446/u/UCnLozCO8w7uJODg8_iAGaVw</a></code>
                     </li>
-                </ol>
+                </ul>
             </li>
         </ul>
     </li>
@@ -76,20 +76,20 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
             <li>
                 <code><a
                         href="https://www.youtube.com/watch?v=5LyUgE4XPuU">https://www.youtube.com/watch?v=5LyUgE4XPuU</a></code>
-                <ol>
+                <ul>
                     <li>
                         <code><a href="http://localhost:5446/dl/5LyUgE4XPuU.m4a">http://localhost:5446/dl/5LyUgE4XPuU.m4a</a></code>
                     </li>
-                </ol>
+                </ul>
             </li>
             <li>
                 <code><a
                         href="https://www.youtube.com/watch?v=Xo3xqm-AtqE">https://www.youtube.com/watch?v=Xo3xqm-AtqE</a></code>
-                <ol>
+                <ul>
                     <li>
                         <code><a href="http://localhost:5446/dl/Xo3xqm-AtqE.m4a">http://localhost:5446/dl/Xo3xqm-AtqE.m4a</a></code>
                     </li>
-                </ol>
+                </ul>
             </li>
         </ul>
     </li>
