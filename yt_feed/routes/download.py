@@ -8,7 +8,6 @@ from yt_dlp.utils import DownloadError
 
 from yt_feed.utils.ytdlp_inter import extract_audio
 
-
 download_route = Blueprint("download_page", __name__)
 download_lock = FileLock("/tmp/download_route.lock")
 

@@ -1,6 +1,5 @@
 # yt_feed
 
-
 Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a podcast.
 
 [![yt_feed](https://github.com/jaredkoontz/yt_feed/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/jaredkoontz/yt_feed/actions/workflows/python-app.yml)
@@ -99,7 +98,8 @@ Create a working RSS feed (for your podcatcher) to turn a YouTube channel into a
 
 ### Pre-reqs
 
-You'll need a YouTube api key. Information on how to get one can be found [here](https://developers.google.com/youtube/v3/getting-started).
+You'll need a YouTube api key. Information on how to get one can be
+found [here](https://developers.google.com/youtube/v3/getting-started).
 
 ### Docker
 
