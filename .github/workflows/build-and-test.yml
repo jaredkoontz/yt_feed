@@ -14,7 +14,7 @@ jobs:
     name: python test
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: Check for .env file
@@ -25,19 +25,18 @@ jobs:
           fi
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
 
       - name: Install pyrefly
         run: uv tool install pyrefly
 
       - name: "Set up Python"
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version-file: "pyproject.toml"
 
       - name: Install the project
         run: uv sync --locked --all-extras --dev
-
 
       - name: install-precommit
         run: uv tool install pre-commit
