@@ -1,6 +1,6 @@
 [project]
 name = "yt_feed"
-version = "0.5.0"
+version = "0.5.1"
 description = "Create a working RSS feed (for your podcatcher) to turn a youtube channel into an audio podcast"
 readme = "README.md"
 requires-python = ">=3.12"
