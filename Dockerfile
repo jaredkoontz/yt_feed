@@ -14,8 +14,6 @@ RUN uv python install 3.13
 
 WORKDIR /app
 
-COPY yt_feed /app/yt_feed
-# the uv examples mount these (left in for now), but we are going to just manually copy them in
 COPY uv.lock /app
 COPY pyproject.toml /app
 COPY README.md /app
@@ -26,16 +24,22 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-install-project --no-dev
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --no-dev
+    --mount=type=bind,source=yt_feed,target=/app/yt_feed \
+    uv build --wheel --out-dir /tmp/wheels
+
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv pip install --python /app/.venv/bin/python --no-deps /tmp/wheels/*.whl
 
 # Then, use a final image without uv
 FROM debian:bookworm-slim
 
 # Copy the Python version
-COPY --from=builder --chown=python:python /python /python
+COPY --from=builder /python /python
 
-# Copy the application from the builder
-COPY --from=builder --chown=app:app /app /app
+# Copy the virtual environment containing the application wheel
+COPY --from=builder /app/.venv /app/.venv
+
+WORKDIR /app
 
 # get our dependencies for ytp-dl
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -53,4 +57,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 # we could copy an .env file if we have one.
 COPY .env* /app/.env
 
-CMD ["gunicorn", "--conf", "app/yt_feed/conf/gunicorn_conf.py", "--bind", "0.0.0.0:80", "yt_feed.web_app:yt_feed_app"]
+CMD ["gunicorn", "--conf", "python:yt_feed.conf.gunicorn_conf", "--bind", "0.0.0.0:80", "yt_feed.web_app:yt_feed_app"]
