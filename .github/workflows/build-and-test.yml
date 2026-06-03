@@ -64,6 +64,18 @@ jobs:
         with:
           command: ''
 
-      - name: Test with pytest
+      - name: Build wheel
         run: |
-          uv run python -m pytest
+          uv build --wheel --out-dir dist
+
+      - name: Test installed wheel with pytest
+        run: |
+          uv venv .wheel-venv
+          uv pip install --python .wheel-venv/bin/python dist/*.whl pytest pytest-cov
+
+          wheel_test_dir="$(mktemp -d)"
+          cp -R test "${wheel_test_dir}/test"
+          cp pyproject.toml "${wheel_test_dir}/pyproject.toml"
+
+          cd "${wheel_test_dir}"
+          "${GITHUB_WORKSPACE}/.wheel-venv/bin/python" -m pytest
