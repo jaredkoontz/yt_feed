@@ -54,7 +54,10 @@ COPY --from=denoland/deno:bin-2.6.7 /deno /usr/local/bin/deno
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
 
-# we could copy an .env file if we have one.
-COPY .env* /app/.env
+# Config comes from the environment at run time (YOUTUBE_API_KEY, DOMAIN) so that
+# a local build never bakes a developer's .env -- and the key inside it -- into a
+# published layer. .env is also listed in .dockerignore.
+
+EXPOSE 80
 
 CMD ["gunicorn", "--conf", "python:yt_feed.conf.gunicorn_conf", "--bind", "0.0.0.0:80", "yt_feed.web_app:yt_feed_app"]
