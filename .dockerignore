@@ -1,0 +1,44 @@
+# Secrets. Nothing here should ever reach a published image -- runtime config
+# comes from environment variables (see the README).
+.env
+.env.*
+*.pem
+*.key
+
+# Version control
+.git/
+.github/
+.gitignore
+.pre-commit-config.yaml
+
+# Local virtualenv and build output
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Byte-compiled / cached files
+__pycache__/
+*.py[cod]
+
+# Tooling caches and test artifacts
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyre/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Editor / IDE
+.idea/
+.vscode/
+
+# Not needed to build or run the app
+test/
+tools/
+config/
+notes.txt
+LICENSE
