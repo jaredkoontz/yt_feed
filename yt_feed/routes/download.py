@@ -31,7 +31,7 @@ def yt_dl(video_id: str, suffix: str) -> Response:
             result = extract_audio(video_id)
     except DownloadError as e:
         # unfortunately, yt_dlp does not provide a way to get the error type. It is just a generic DownloadError
-        # so we have to do string parsing.
+        # so we have to do string parsing to find out the error.
         err_msg = e.msg
         if err_msg and "Sign in to confirm your age." in err_msg:
             return make_response(
