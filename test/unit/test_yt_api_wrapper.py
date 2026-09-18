@@ -63,9 +63,9 @@ def test_youtube_builds_the_v3_service_with_the_configured_key(
 ):
     built = {}
 
-    def _fake_build(service_name, version, developer_key):
+    def _fake_build(service_name, version, developerKey):
         built.update(
-            service_name=service_name, version=version, developer_key=developer_key
+            service_name=service_name, version=version, developerKey=developerKey
         )
         return _FakeYouTube()
 
@@ -78,7 +78,7 @@ def test_youtube_builds_the_v3_service_with_the_configured_key(
     assert built == {
         "service_name": "youtube",
         "version": "v3",
-        "developer_key": "test-api-key",
+        "developerKey": "test-api-key",
     }
 
 
