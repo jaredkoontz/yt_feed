@@ -37,7 +37,9 @@ module-root = ""
 [tool.pytest.ini_options]
 addopts = [
     "--cov=yt_feed",
+    "--cov-branch",
     "--cov-report=term-missing",
+    "--cov-fail-under=100",
 ]
 testpaths = ["test"]
 
