@@ -51,6 +51,20 @@ def test_env_vars_raise_when_missing_required_values(monkeypatch: pytest.MonkeyP
     assert "YOUTUBE_API_KEY not set" in str(exc_info.value)
 
 
+def test_invalid_config_reports_only_the_missing_domain():
+    message = str(InvalidConfigException("", "deadbeef"))
+
+    assert "DOMAIN not set" in message
+    assert "YOUTUBE_API_KEY" not in message
+
+
+def test_invalid_config_reports_only_the_missing_api_key():
+    message = str(InvalidConfigException("https://example.com", ""))
+
+    assert "YOUTUBE_API_KEY not set" in message
+    assert "DOMAIN" not in message
+
+
 def test_env_vars_cache_loaded_values(monkeypatch: pytest.MonkeyPatch):
     domain = "https://example.com"
     key = "deadbeef"
