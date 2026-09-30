@@ -64,6 +64,25 @@ def test_video_entry_rejects_short_duration():
     assert VideoEntry.construct(raw) is None
 
 
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        pytest.param(
+            {"snippet": video_data[0]["snippet"] | {"publishedAt": "not-a-date"}},
+            id="bad-timestamp",
+        ),
+        pytest.param(
+            {"snippet": video_data[0]["snippet"] | {"publishedAt": None}},
+            id="null-timestamp",
+        ),
+        pytest.param({"contentDetails": {"duration": "garbage"}}, id="bad-duration"),
+        pytest.param({"contentDetails": {"duration": None}}, id="null-duration"),
+    ],
+)
+def test_video_entry_rejects_malformed_data(overrides: dict):
+    assert VideoEntry.construct(video_data[0] | overrides) is None
+
+
 def test_video_entry_constructs_duration_as_timedelta():
     entry = VideoEntry.construct(video_data[0])
 
