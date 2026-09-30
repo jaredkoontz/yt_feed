@@ -27,6 +27,28 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
 
+      # Every PR gets a patch bump over main. If the PR already sits above main
+      # (a manual minor/major bump, or a previous run of this step), leave it alone.
+      - name: Bump patch version if on PR
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --depth=1 origin "${{ github.base_ref }}"
+          main_version=$(git show FETCH_HEAD:pyproject.toml | python3 -c "import sys, tomllib; print(tomllib.loads(sys.stdin.read())['project']['version'])")
+          pr_version=$(uv version --short)
+          next_version=$(python3 - "$main_version" "$pr_version" <<'EOF'
+          import sys
+          main, pr = (tuple(int(p) for p in v.split(".")) for v in sys.argv[1:])
+          if pr <= main:
+              print(f"{main[0]}.{main[1]}.{main[2] + 1}")
+          EOF
+          )
+          if [ -n "$next_version" ]; then
+            echo "main is $main_version, PR is $pr_version, bumping to $next_version"
+            uv version "$next_version"
+          else
+            echo "PR version $pr_version is already ahead of main ($main_version)"
+          fi
+
       - name: Install pyrefly
         run: uv tool install pyrefly
 
@@ -52,9 +74,9 @@ jobs:
         run: |
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
-          git add README.md
+          git add README.md pyproject.toml uv.lock
           timestamp=$(date -u)
-          git commit -m "$GITHUB_SHA Triggered a README.md update ${timestamp}" || exit 0
+          git commit -m "$GITHUB_SHA Triggered a README.md/version update ${timestamp}" || exit 0
           git push
         if: github.event_name == 'pull_request'
 
@@ -79,3 +101,22 @@ jobs:
 
           cd "${wheel_test_dir}"
           "${GITHUB_WORKSPACE}/.wheel-venv/bin/python" -m pytest
+
+  tag-release:
+    name: tag release
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Create tag and release for the current version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+          if git ls-remote --exit-code --tags origin "refs/tags/v${version}" > /dev/null; then
+            echo "v${version} already exists, nothing to do"
+            exit 0
+          fi
+          gh release create "v${version}" --target "$GITHUB_SHA" --title "v${version}" --generate-notes

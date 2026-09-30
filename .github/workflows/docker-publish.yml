@@ -3,8 +3,6 @@ name: Docker
 on:
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
 
@@ -37,6 +35,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Tags pushed by the build-and-test workflow use GITHUB_TOKEN, which can't trigger this
+      # workflow, so read the version straight from pyproject.toml instead of waiting on a tag.
+      - name: Read project version
+        id: version
+        run: |
+          echo "version=$(python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")" >> "$GITHUB_OUTPUT"
+
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract metadata (tags, labels) for Docker
@@ -44,6 +49,11 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}},value=v${{ steps.version.outputs.version }},enable=${{ github.ref == 'refs/heads/main' }}
+            type=semver,pattern={{major}}.{{minor}},value=v${{ steps.version.outputs.version }},enable=${{ github.ref == 'refs/heads/main' }}
 
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
       # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see [Usage](https://github.com/docker/build-push-action#usage) in the README of the `docker/build-push-action` repository.
