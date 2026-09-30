@@ -64,6 +64,16 @@ def test_video_entry_rejects_short_duration():
     assert VideoEntry.construct(raw) is None
 
 
+def test_video_entry_accepts_duration_over_24_hours():
+    # 1 day + 5 seconds: timedelta.seconds would be 5, which used to be rejected as too short.
+    raw = video_data[0] | {"contentDetails": {"duration": "P1DT5S"}}
+
+    entry = VideoEntry.construct(raw)
+
+    assert entry is not None
+    assert entry.duration == datetime.timedelta(days=1, seconds=5)
+
+
 @pytest.mark.parametrize(
     "overrides",
     [
