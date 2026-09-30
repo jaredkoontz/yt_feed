@@ -75,6 +75,33 @@
         #note p {
             font-size: 12px;
         }
+
+        .convert {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0 5px;
+            max-width: 900px;
+        }
+
+        .convert input {
+            flex: 1;
+            padding: 8px;
+            font-size: 18px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+        }
+
+        .convert button {
+            padding: 8px 16px;
+            font-size: 18px;
+            background: blueviolet;
+            border: none;
+            cursor: pointer;
+        }
+
+        .convert_error {
+            color: #ff6b6b;
+        }
     </style>
 </head>
 <body>
@@ -85,6 +112,23 @@
 <div class="how2">
     <p>Convert any YouTube channel or playlist into an audio podcast. This tool will create an RSS feed for your
         podcatcher, and then handle the streaming of the media when your podcatcher requests it.</p>
+    <br/>
+    <h2>Paste a YouTube link:</h2>
+    <form action="/" class="convert" method="get">
+        <input aria-label="YouTube url" name="url" placeholder="https://www.youtube.com/@AdamNeely"
+               required type="text" value="{{ PASTED | e }}">
+        <button type="submit">Get feed</button>
+    </form>
+    {% if FEED_URL %}
+        <div class="convert">
+            <input aria-label="Feed url" id="feed_url" readonly type="text" value="{{ FEED_URL | e }}">
+            <button onclick="navigator.clipboard.writeText(document.getElementById('feed_url').value); this.textContent = 'Copied'"
+                    type="button">Copy
+            </button>
+        </div>
+    {% elif PASTED %}
+        <p class="convert_error">Couldn't find a channel, playlist, or video in that link.</p>
+    {% endif %}
     <br/>
     <br/>
     <h2>Usage:</h2>
