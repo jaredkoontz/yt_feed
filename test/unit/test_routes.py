@@ -50,6 +50,13 @@ def test_channel(client, mock_yt_api):
     assert "xml" in response.data.decode("utf-8")
 
 
+def test_feed_enclosure_uses_registered_mime_type(client, mock_yt_api):
+    body = client.get("/c/foo").data.decode("utf-8")
+    assert "<enclosure" in body
+    assert 'type="audio/mp4"' in body
+    assert "audio/m4a" not in body
+
+
 def test_user(client, mock_yt_api):
     response = client.get("/u/foo")
     assert response.data is not None

@@ -121,7 +121,9 @@ class VideoEntry:
             )
             thumbnail = raw["snippet"]["thumbnails"]["high"]["url"]
 
-            if duration.seconds < datetime.timedelta(seconds=10).seconds:
+            # total_seconds() rather than .seconds: .seconds drops the days component,
+            # so a 24h+ livestream VOD would otherwise look only a few seconds long.
+            if duration.total_seconds() < 10:
                 raise DurationException("Video duration is too short", "")
 
             return {
