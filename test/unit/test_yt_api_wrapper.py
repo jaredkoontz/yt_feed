@@ -1,5 +1,6 @@
 import pytest
 
+from test.data.video_data import video_data
 from yt_feed.utils import yt_api_wrapper
 
 
@@ -51,6 +52,9 @@ class _FakeYouTube:
         return _FakeCollection(self._response, self._error)
 
     def playlists(self):
+        return _FakeCollection(self._response, self._error)
+
+    def videos(self):
         return _FakeCollection(self._response, self._error)
 
 
@@ -118,6 +122,27 @@ def test_paginated_calls_close_youtube_service(monkeypatch: pytest.MonkeyPatch):
         assert not service.closed
 
     assert service.closed
+
+
+def test_yt_videos_info_skips_malformed_videos_without_failing_the_feed(
+    monkeypatch: pytest.MonkeyPatch,
+):
+    good = video_data[0]
+    bad_timestamp = good | {
+        "id": "bad-timestamp",
+        "snippet": good["snippet"] | {"publishedAt": "not-a-date"},
+    }
+    bad_duration = good | {"id": "bad-duration", "contentDetails": {"duration": "x"}}
+    missing_snippet = {"id": "missing-snippet"}
+    service = _FakeYouTube(
+        {"items": [bad_timestamp, good, bad_duration, missing_snippet]}
+    )
+    _patch_youtube(monkeypatch, service)
+
+    with yt_api_wrapper.youtube_service() as youtube:
+        videos = yt_api_wrapper.yt_videos_info(youtube, ("a", "b", "c", "d"))
+
+    assert [v.id for v in videos] == [good["id"]]
 
 
 def test_get_all_items_follows_every_page():

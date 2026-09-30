@@ -132,7 +132,17 @@ class VideoEntry:
                 "duration": duration,
                 "thumbnail": thumbnail,
             }
-        except (KeyError, DurationException):
+        # one malformed item should be skipped rather than failing the whole feed.
+        # ValueError covers bad timestamps from strptime; ISO8601Error (a ValueError
+        # subclass) is listed explicitly for bad durations from isodate. TypeError
+        # covers fields that come back as null.
+        except (
+            KeyError,
+            TypeError,
+            ValueError,
+            isodate.ISO8601Error,
+            DurationException,
+        ):
             return None
 
 

@@ -1,4 +1,6 @@
-video_data = [
+from typing import Any
+
+video_data: list[dict[str, Any]] = [
     {
         "contentDetails": {
             "caption": "false",
