@@ -92,9 +92,13 @@ def test_feed_has_no_placeholder_contact_fields(client, mock_yt_api):
 
 
 def test_feed_category_is_an_apple_category(client, mock_yt_api):
+    # in my podcatcher, i like having a way to easily find the feeds i am using yt_feed for
+    # if you want to have a real itunes category, 'TV & Film' would probably be the
+    # best choice. In this version I am using 'yt_feed' so i can easily find the feeds
+    # i am using yt_feed for
     category = _channel(client, "/c/foo").find(f"{_ITUNES}category")
     assert category is not None
-    assert category.get("text") == "TV & Film"
+    assert category.get("text") == "yt_feed"
 
 
 def test_items_carry_enclosure_length_and_numeric_duration(client, mock_yt_api):
