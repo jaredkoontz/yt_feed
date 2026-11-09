@@ -1,6 +1,5 @@
 import dataclasses
 import datetime
-import html
 from typing import Any
 from typing import cast
 from typing import Self
@@ -52,8 +51,8 @@ class ChannelEntry:
         uploads = ""
 
         if raw.get("items"):
-            title = html.escape(raw["items"][0]["snippet"]["title"])
-            desc = html.escape(raw["items"][0]["snippet"]["description"])
+            title = raw["items"][0]["snippet"]["title"]
+            desc = raw["items"][0]["snippet"]["description"]
             thumbnail_url = raw["items"][0]["snippet"]["thumbnails"]["high"]["url"]
             try:
                 uploads = raw["items"][0]["contentDetails"]["relatedPlaylists"][
@@ -109,8 +108,8 @@ class VideoEntry:
         # have a duration of "0:00", so we can use that to just ignore live data.
         # do these show up on stream tabs? how can i get these later? do i want to?
         try:
-            title = html.escape(raw["snippet"]["title"])
-            desc = html.escape(raw["snippet"]["description"])
+            title = raw["snippet"]["title"]
+            desc = raw["snippet"]["description"]
             my_id = raw["id"]
             published_at_dt = datetime.datetime.strptime(
                 raw["snippet"]["publishedAt"], "%Y-%m-%dT%H:%M:%SZ"

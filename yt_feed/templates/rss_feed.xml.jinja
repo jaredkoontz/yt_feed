@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+{# Flask only autoescapes templates ending in .xml/.html, not .xml.jinja, so opt in explicitly. #}
+{% autoescape true %}
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:atom="http://www.w3.org/2005/Atom"
      version="2.0">
  <channel>
   <title>{{ videos_data['channel_data'].title }}</title>
@@ -8,11 +11,11 @@
   <language>en-us</language>
   <generator>yt_feed</generator>
   <itunes:category text="yt_feed"/>
-  <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-  <pubDate>{{ now }}</pubDate>
-  <lastBuildDate>{{ now }}</lastBuildDate>
-  <managingEditor>🥳@🔥.🎵</managingEditor>
-  <webMaster>Spider-Man</webMaster>
+  <docs>https://www.rssboard.org/rss-specification</docs>
+  {% if last_published %}
+  <pubDate>{{ last_published }}</pubDate>
+  <lastBuildDate>{{ last_published }}</lastBuildDate>
+  {% endif %}
   <image>
    <title>{{ videos_data['channel_data'].title }}</title>
    <link>{{ videos_data['channel_data'].originating_url }}</link>
@@ -23,35 +26,33 @@
   <itunes:explicit>false</itunes:explicit>
   <itunes:image href="{{ videos_data['channel_data'].thumbnail_url }}"/>
   <itunes:owner>
-   <itunes:email>🥳@🔥.🎵</itunes:email>
    <itunes:name>{{ videos_data['channel_data'].title }}</itunes:name>
   </itunes:owner>
   <itunes:subtitle>{{ videos_data['channel_data'].title }}</itunes:subtitle>
   <itunes:summary>{{ videos_data['channel_data'].desc }}</itunes:summary>
   <itunes:block>no</itunes:block>
-  <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml"
-               href="{{ DOMAIN }}/channel/{{ videos_data['video_info'][0]['id'] }}"
-    {# TODO this is supposed to be a self referential link of the original request #}
-  />
+  <atom:link rel="self" type="application/rss+xml" href="{{ feed_url }}"/>
 
   {% for video_item in videos_data['video_info'] %}
    <item>
     <title>{{ video_item.title }}</title>
     <link>https://www.youtube.com/watch?v={{ video_item.id }}</link>
+    {# the real size is only known after a yt-dlp extraction; 0 is the accepted "unknown" #}
     <enclosure
       url="{{ DOMAIN }}/dl/{{ video_item.id }}.m4a"
+      length="0"
       type="audio/mp4"
-      {# TODO missing length here #}
     />
     <itunes:image href="{{ video_item.thumbnail }}"/>
     <description>{{ video_item.desc }}</description>
     <guid>https://www.youtube.com/watch?v={{ video_item.id }}</guid>
     <pubDate>{{ video_item.published_at }}</pubDate>
-    <itunes:duration>{{ video_item.duration }}</itunes:duration>
-    <author>{{ videos_data['channel_data'].title }}</author>
+    <itunes:duration>{{ video_item.duration.total_seconds()|int }}</itunes:duration>
+    <itunes:author>{{ videos_data['channel_data'].title }}</itunes:author>
     <itunes:subtitle>{{ video_item.title }}</itunes:subtitle>
     <itunes:summary>{{ video_item.desc }}</itunes:summary>
    </item>
   {% endfor %}
  </channel>
 </rss>
+{% endautoescape %}

@@ -26,7 +26,8 @@ def test_channel_entry_allows_missing_uploads_playlist():
 
     entry = ChannelEntry.construct(raw, "https://example.com/channel")
 
-    assert entry.title == "A &lt;channel&gt;"
+    # escaping belongs to the template, so models keep the raw text
+    assert entry.title == "A <channel>"
     assert entry.playlist_id == ""
 
 
