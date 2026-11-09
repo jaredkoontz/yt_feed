@@ -178,6 +178,49 @@ def test_download_does_not_cache_a_failed_extraction(client, monkeypatch):
     assert extractor.calls == 2
 
 
+@pytest.mark.parametrize("protocol", ["http_dash_segments", "m3u8_native"])
+def test_download_rejects_segmented_streams(client, monkeypatch, protocol):
+    monkeypatch.setattr(
+        download,
+        "extract_audio",
+        lambda video_id: {
+            "url": "https://example.com/first-fragment",
+            "protocol": protocol,
+        },
+    )
+
+    response = client.get("/dl/video123.m4a")
+
+    assert response.status_code == 503
+    assert response.headers["Retry-After"] == "3600"
+    assert "live stream" in response.get_data(as_text=True)
+
+
+def test_download_does_not_cache_a_segmented_stream(client, monkeypatch):
+    extractor = _CountingExtractor(
+        {"url": "https://example.com/first-fragment", "protocol": "http_dash_segments"}
+    )
+    monkeypatch.setattr(download, "extract_audio", extractor)
+
+    client.get("/dl/video123.m4a")
+    client.get("/dl/video123.m4a")
+
+    assert extractor.calls == 2
+
+
+def test_download_redirects_single_file_protocols(client, monkeypatch):
+    monkeypatch.setattr(
+        download,
+        "extract_audio",
+        lambda video_id: {"url": "https://example.com/a.m4a", "protocol": "https"},
+    )
+
+    response = client.get("/dl/video123.m4a")
+
+    assert response.status_code == 302
+    assert response.headers["Location"] == "https://example.com/a.m4a"
+
+
 def test_download_does_not_cache_an_already_expired_url(client, monkeypatch):
     expired = "https://rr1.googlevideo.com/videoplayback?expire=1"
     extractor = _CountingExtractor({"url": expired})
