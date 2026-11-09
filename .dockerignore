@@ -40,5 +40,5 @@ coverage.xml
 test/
 tools/
 config/
-notes.txt
+notes.md
 LICENSE
