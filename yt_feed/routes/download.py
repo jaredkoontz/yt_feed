@@ -11,7 +11,25 @@ from yt_feed.utils.download_cache import cached_audio_url
 from yt_feed.utils.ytdlp_inter import extract_audio
 
 download_route = Blueprint("download_page", __name__)
-download_lock = FileLock("/tmp/download_route.lock")
+download_lock = FileLock(r"/tmp/download_route.lock")
+
+# Protocols where the url is a single file a podcatcher can fetch in one go.
+_SINGLE_FILE_PROTOCOLS = frozenset({"http", "https"})
+
+# Live streams, and streams that ended but YouTube hasn't finished processing, take
+# a while to become a normal video. Ask clients to back off for about that long.
+_NOT_READY_RETRY_AFTER = 3600
+
+
+def _is_single_file(result: dict) -> bool:
+    """
+    Live and just-ended streams are only offered as segmented formats (DASH or HLS).
+    Their url points at one ~5 second fragment, so redirecting to it hands the client
+    a "complete" download of a few seconds.
+    """
+    protocol = result.get("protocol")
+    # an extraction that doesn't report a protocol is treated as a plain file
+    return protocol is None or protocol in _SINGLE_FILE_PROTOCOLS
 
 
 @download_route.route("/dl/<video_id>.<suffix>")
@@ -45,5 +63,14 @@ def yt_dl(video_id: str, suffix: str) -> Response:
         return make_response("Busy, retry shortly", 429)
     if not result.get("url"):
         return make_response("Error downloading video", 500)
+    if not _is_single_file(result):
+        # deliberately not cached: once YouTube finishes processing the stream, a
+        # retry should pick up the real single file format
+        response = make_response(
+            "This video is a live stream that YouTube has not finished processing, retry later",
+            503,
+        )
+        response.headers["Retry-After"] = str(_NOT_READY_RETRY_AFTER)
+        return response
     cache_audio_url(video_id, result["url"])
     return redirect(result["url"])
